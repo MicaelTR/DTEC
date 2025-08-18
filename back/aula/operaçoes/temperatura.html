@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatura</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    function validar(teperatura) {
+        if (temperatura < 0 ) {
+            alert(`Está congelando!`)
+        }
+        else if (temperatura > 0 && temperatura < 19) {
+            alert("Está Frio!")
+        }
+        else if (temperatura >= 20 && temperatura < 30) {
+            alert("A temperatura está agradavel!")
+        }
+        else if (temperatura >= 30 ) {
+            alert("Está muito calor")
+        }
+    }
+
+
+    const temperatura = Number(prompt("Digite a temperatura em graus celsus: "));
+
+    resultado = validar(temperatura);
+
+
+</script>
+
+</html>

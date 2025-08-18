@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fef9f6;
+    color: #3e2c1c;
+  }
+  
+  header {
+    background-color: #5e3829;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    gap: 20px;
+    text-decoration: none;
+    color: white;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: white;
+    transition: transform 0.4s ease;
+  }
+
+  .menu a :hover {
+    transform: scale(1.04);
+  }
+  
+
+  main {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .boas-vindas {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  img {
+    border-radius: 20px;
+    width: 200px;
+  }
+  .galeria{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .botao-card {
+    border-color: #d9a074;
+    padding-right: -60px;
+    border-radius: 10px;
+    width: 240px;
+    padding-top: 10px;
+  }
+
+  .cartoes {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    gap: 20px;            
+    flex-wrap: wrap;        
+    margin-top: 40px;
+    transition: transform 0.4s ease;
+  }
+
+  .cartoes :hover {
+    transform: scale(1.04);
+    background-color: #d9a074;
+  }
+  
+
+  footer {
+    background-color: #5e3829;
+    margin-top: 40px;
+    text-align: center;
+    height: 80px;
+    color: white;
+    padding: 10px;
+  }
+
+  

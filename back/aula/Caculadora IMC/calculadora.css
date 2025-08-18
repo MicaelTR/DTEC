@@ -1,0 +1,111 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #084c53;
+    font-family: Arial, sans-serif;
+    color: #111;
+  }
+  
+  /* Container centralizado */
+  .container {
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+  }
+  
+  /* Tabela IMC */
+  .imc-table {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+  }
+  
+  .imc-header {
+    background-color: #084c53;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+  
+  .imc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .imc-row span {
+    width: 50%;
+  }
+  
+  /* Linha destacada */
+  .destacado {
+    background-color: #d6fcd6;
+    font-weight: bold;
+  }
+  
+  /* Título */
+  #texto-imc p {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* Formulário */
+  form#resposta-user p {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  input[type="number"],
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Botão */
+  button#confirmar {
+    width: 100%;
+    padding: 12px;
+    background-color: #084c53;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 16px;
+  }
+  
+  button#confirmar:hover {
+    background-color: #063c42;
+  }
+  
+  /* Resultado */
+  #resultado {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #92ffb3;
+    color: #084c53;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+  }
+  

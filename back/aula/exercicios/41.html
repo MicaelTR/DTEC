@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function pessoa(nome, idade, profissao) {
+        return {
+            nome,
+            idade,
+            profissao,
+
+            apresentar() {
+                console.log(`Olá meu nome é ${this.nome} tenho ${this.idade} anos e minha profissão atual é ${this.profissao}!`)
+            }
+        }
+    }
+    const p1 = pessoa("Micael", 16, "Programdor iniciante")
+    const p1Ap = p1.apresentar();
+    p1.data = "21/02/2009";
+    delete p1.profissao;
+    console.log(p1.data)
+    console.log(p1.profissao)
+
+
+
+
+</script>
+
+</html>

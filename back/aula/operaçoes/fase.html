@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase</title>
+</head>
+<body>
+    
+</body>
+    <script>
+        function validar (idade) {
+            if (idade > 0 && idade < 18) {
+                alert("Você é menor de idade!")
+            }
+            else if (idade >= 18 && idade < 60) {
+                alert("Você é maior de idade e é adulto!")
+            }
+            else if (idade >= 60) {
+                alert("Você é maior de idade e é idoso!")
+            }
+            else {
+                alert("Digite uma idade valida!")
+            }
+            
+            return idade
+        }
+        
+        const idade = Number(prompt("Digite sua idade: "))
+        idade1 = validar(idade);
+        
+    </script>
+</html>

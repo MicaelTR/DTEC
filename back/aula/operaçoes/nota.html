@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota</title>
+</head>
+<body>
+    
+</body>
+    <script> 
+        function validar(nota) {
+            if (nota < 6) {
+                alert("Reprovado!")
+            }
+            else if (nota >= 6 && nota < 8) {
+                alert("Recuperação!")
+            }
+            else if (nota >= 8 && nota <= 10) {
+                alert("Aprovado!")
+            }
+            else {
+                alert("Digite uma nota valida!")
+            }
+        }
+
+
+        while (true) {
+            const nota = Number(prompt("Digite sua nota: "));
+            if (typeof nota !== "number" || isNaN(nota)) {
+                alert("Digite um numero valido!")
+                const nota = Number(prompt("Digite sua nota: "));
+                resultado = validar(nota);
+            }
+
+            validar(nota);
+            break;
+        }
+
+    </script>
+</html>

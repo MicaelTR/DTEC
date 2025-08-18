@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="click">Clique</button>
+    <p id="saida">Clique para alterar o texto</p>
+</body>
+<script>
+const botao = document.getElementById("click");
+
+botao.addEventListener("click" , function() {
+    alert("Você clicou no botão para testar! ")
+})
+const paragrafo = document.getElementById("saida");
+
+paragrafo.addEventListener("click" , function() {
+    paragrafo.textContent = "O texto foi alterado!"
+})
+
+
+
+</script>
+
+</html>
