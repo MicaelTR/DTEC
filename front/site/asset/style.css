@@ -1,0 +1,311 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CORPO */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #101010;
+  color: #e0ffe0;
+  scroll-behavior: smooth;
+  padding-top: 70px;
+  line-height: 1.8; /* Aumenta espaçamento entre linhas */
+  padding-top: 70px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 20, 10, 0.9); /* já tem fundo escuro transparente */
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  z-index: 1000;
+  border-bottom: none; /* remove borda que poderia aparecer */
+  box-shadow: none; /* remove sombra */
+}
+
+
+.logo {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #00ff99;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #aaffcc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #00e676;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('https://streamrun1.netlify.app/img/iniciar.png') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 30, 10, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: #00ff99;
+}
+
+.hero h1 {
+  font-size: 4em;
+  text-shadow: 2px 2px #000;
+}
+
+.hero p {
+  font-size: 1.5em;
+  margin: 15px 0;
+}
+
+
+.btn-cta:hover {
+  background: #00c853;
+}
+
+/* SEÇÕES */
+.bloco {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.bloco.dark {
+  background-color: #1a1a1a;
+}
+
+h2 {
+  font-size: 2.2em;
+  color: #76ff03;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #a0f07a;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1em;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+/* GALERIA */
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.galeria img {
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,255,100,0.3);
+}
+
+/* DESTAQUES */
+.destaques {
+  list-style: none;
+  max-width: 600px;
+  margin: auto;
+}
+
+.destaques li {
+  background-color: #2e7d32;
+  color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-left: 5px solid #00e676;
+  border-radius: 6px;
+  text-align: left;
+}
+
+/* DOWNLOAD */
+.btn-download {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  font-size: 1.1em;
+  background-color: #00ff99;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn-download:hover {
+  background-color: #00c377;
+}
+
+/* RODAPÉ */
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  background: #000;
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+footer a {
+  color: #00e676;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    background: #111;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    padding: 10px;
+    display: none;
+  }
+
+  .galeria img {
+    width: 90%;
+  }
+
+  .hero h1 {
+    font-size: 2.5em;
+  }
+
+  .hero p {
+    font-size: 1.2em;
+  }
+
+  .btn-cta, .btn-download {
+    font-size: 1em;
+    padding: 12px 20px;
+  }
+
+  .capangas-container {
+    flex-direction: column;
+  }
+
+  .capanga-destaque {
+    max-width: 100%;
+  }
+}
+
+/* PERSONAGEM */
+.personagem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px 0;
+  text-align: left;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.personagem img {
+  width: 200px;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,255,100,0.3);
+}
+
+.descricao-personagem {
+  max-width: 500px;
+}
+
+/* VILÕES - Container para os capangas lado a lado */
+.capangas-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+/* Capanga destaque */
+.capanga-destaque {
+  background-color: #1c1c1c;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,255,100,0.3);
+  text-align: center;
+  max-width: 400px;
+  flex: 1 1 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.capanga-destaque img {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  width: 250px;
+}
+
+.capanga-destaque.capanga-orc img {
+  width: 200px;
+}
+
+.capanga-destaque.capanga-gorila img {
+  width: 500px;
+}
+
+.capanga-destaque.capanga-macaco img {
+  width: 400px;
+}
+
+.lista-equipe {
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
+  max-width: 600px;
+  margin: 30px auto 0 auto;
+  color: #e0ffe0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
