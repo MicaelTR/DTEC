@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista com Ordenação</title>
+</head>
+<body>
+    <div>
+        <p>Adicione um item à lista:</p>
+        <input type="text" id="nome-produto">
+        <button id="adicionar">Adicionar</button>
+        <button id="ordenar">Ordenar A-Z</button>
+
+        <ul id="lista"></ul>
+    </div>
+
+    <script>
+        const lista = document.querySelector("#lista");
+        const btnAdicionar = document.querySelector("#adicionar");
+        const btnOrdenar = document.querySelector("#ordenar");
+        const inputProduto = document.querySelector("#nome-produto");
+
+        const itens = []; // ← Armazena os nomes adicionados
+
+        function criarItem(nome) {
+            const item = document.createElement("li");
+            item.style.marginTop = "10px";
+            item.textContent = nome;
+
+            const remove = document.createElement("button");
+            remove.textContent = "Remover";
+            remove.style.marginLeft = "10px";
+
+            remove.addEventListener("click", function () {
+                lista.removeChild(item);
+
+                // Remove o nome do array também
+                const index = itens.indexOf(nome);
+                if (index > -1) {
+                    itens.splice(index, 1);
+                }
+            });
+
+            item.appendChild(remove);
+            return item;
+        }
+
+        btnAdicionar.addEventListener("click", function () {
+            const nome = inputProduto.value.trim();
+
+            if (nome) {
+                itens.push(nome); // salva no array
+
+                const item = criarItem(nome);
+                lista.appendChild(item);
+
+                inputProduto.value = "";
+                inputProduto.focus();
+            }
+        });
+
+        btnOrdenar.addEventListener("click", function () {
+            // Limpa a lista visual
+            lista.innerHTML = "";
+
+            // Ordena o array em ordem alfabética (A-Z)
+            itens.sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+            // Recria os itens ordenados
+            itens.forEach(function (nome) {
+                const item = criarItem(nome);
+                lista.appendChild(item);
+            });
+        });
+    </script>
+</body>
+</html>

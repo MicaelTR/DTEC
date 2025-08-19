@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="titulo">Minha Página</h1>
+    <p class="texto" id="textop">Parágrafo 1</p>
+    <p class="texto">Parágrafo 2</p>
+    <input id="input" type="text">
+    <button id="btn1">Alerta</button>
+    <button id="btn2">Muda cor</button>
+    <button id="btn3">Uppercase</button>
+    <button id="btn4">Troca título</button>
+
+</body>
+    <script>
+        const h1 = document.querySelector("#titulo");
+        const paragrafo1 = document.querySelector("#textop");
+        const alerta = document.querySelector("#btn1");
+        const input = document.querySelector("#input");
+    
+        
+        const paragrafos = document.querySelectorAll(".texto");
+
+        const mudarCor = document.querySelector("#btn2");
+
+        const maior = document.querySelector("#btn3");
+
+        // Mudando o primeiro parágrafo
+        paragrafo1.textContent = "Texto alterado!"
+
+        // Mostrar o alerta quando o usuario clicar no titulo
+        h1.addEventListener("click" , function () {
+            alert("Você clicou no titulo da página!")
+        });
+
+        alerta.addEventListener("click" , function() {
+            const valor = input.value;
+            alert(valor)
+        })
+
+        mudarCor.addEventListener("click" , function() {
+            h1.style.color = "blue"
+        })
+
+        maior.addEventListener("click" , function() {
+            const paragrafosMaior = paragrafos.textContent.toUpperCase()
+        })
+
+    </script>
+</html>

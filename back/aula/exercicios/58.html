@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Botões</title>
+    <style>
+        .content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <button onclick="mostrarConteudo('A')">A</button>
+        <button onclick="mostrarConteudo('B')">B</button>
+        <button onclick="mostrarConteudo('C')">C</button>
+    </div>
+
+    <div id="content-A" class="content">
+        <h2>Conteúdo A</h2>
+        <p>Este é o conteúdo da seção A.</p>
+    </div>
+
+    <div id="content-B" class="content">
+        <h2>Conteúdo B</h2>
+        <p>Este é o conteúdo da seção B.</p>
+    </div>
+
+    <div id="content-C" class="content">
+        <h2>Conteúdo C</h2>
+        <p>Este é o conteúdo da seção C.</p>
+    </div>
+
+    <script>
+        function mostrarConteudo(conteudo) {
+            // Esconde todos os conteúdos
+            const allContent = document.querySelectorAll('.content');
+            allContent.forEach(function(item) {
+                item.style.display = 'none';
+            });
+
+            // Mostra o conteúdo correspondente
+            const contentToShow = document.getElementById('content-' + conteudo);
+            if (contentToShow) {
+                contentToShow.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contando</title>
+</head>
+<body>
+    <div>
+        <h2>Clique no botão para contar</h2>
+        <p id="contador"> Contador = 0</p>
+        <button id="clicar">Clique</button>
+    </div>
+</body>
+    <script>
+        const contador = document.querySelector("#contador");
+        const btnClique = document.querySelector("#clicar");
+
+        let numeroContador = 0;
+
+        btnClique.addEventListener("click" , function () {
+            if (numeroContador < 5) {
+                numeroContador ++
+
+                contador.textContent = `Contador = ${numeroContador}`
+            }
+            else {
+                contador.textContent = `Você atingiu o máximo do contador!`
+                numeroContador = 0
+            }
+        })
+    </script>
+</html>
