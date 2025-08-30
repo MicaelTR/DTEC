@@ -1,108 +1,141 @@
 :root {
-    --fundo: #0f172a;
-    --painel: #0b1220;
-    --linha: #334155;
-    --texto: #e5e7eb;
-    --muted: #94a3b8;
-    --acc: #60a5fa;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    margin: 0;
-    padding: 20px;
-    background: var(--fundo);
-    color: var(--texto);
-  }
-  
-  .wrap {
-    max-width: 1000px;
-    margin: auto;
-  }
-  
-  h1 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .muted {
-    color: var(--muted);
-  }
-  
-  .filters {
-    margin: 1rem 0;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  
-  .pill {
-    padding: 6px 12px;
-    border: 1px solid var(--muted);
-    background: var(--painel);
-    color: white;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
-  }
+  --fundo: #0f172a;
+  --painel: #0b1220;
+  --linha: #334155;
+  --texto: #e5e7eb;
+  --muted: #94a3b8;
+  --acc: #60a5fa;
+  font-family: Arial, sans-serif;
+}
 
-  .pill:hover {
-    transform: scale(1.06);
-  }
-  
-  .pill[aria-pressed="true"] {
-    background: var(--acc);
-    color: #031525;
-    border-color: transparent;
-  }
-  
-  .grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-  
-  .card {
-    background: var(--painel);
-    border-radius: 8px;
-    border: 4px;
-    border-color: #94a3b8;
-    overflow: hidden;
-    transition: opacity 0.2s ease;
-  }
-  
-  .card img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    display: block;
-  }
-  
-  .meta {
-    padding: 8px;
-  }
+body {
+  margin: 0;
+  padding: 20px;
+  background: var(--fundo);
+  color: var(--texto);
+}
 
-  .buscar {
-    margin-left: 320px;
-    padding-left: 10px;
-    padding-right: 20px;
-    border: 1px solid var(--acc);
-    border-radius: 4px;
-    background-color: var(--painel);
-    text-align: left;
-    color: white;
-  }
+.wrap {
+  max-width: 1000px;
+  margin: auto;
+}
 
-  .limpar {
-    padding: 6px 12px;
-    background-color: var(--acc);
-    color: #031525;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid var(--muted);
-  }
-  
-  .hidden {
-    display: none !important;
-  }
-  
+h1 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.filters {
+  margin: 1rem 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 6px 12px;
+  border: 1px solid var(--muted);
+  background: var(--painel);
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.pill:hover {
+  transform: scale(1.06);
+}
+
+.pill[aria-pressed="true"] {
+  background: var(--acc);
+  color: #031525;
+  border-color: transparent;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.card {
+  background: var(--painel);
+  border-radius: 8px;
+  border: 4px;
+  border-color: #94a3b8;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.meta {
+  padding: 8px;
+}
+
+.buscar {
+  margin-left: 30px;
+  padding-left: 10px;
+  padding-right: 20px;
+  border: 1px solid var(--acc);
+  border-radius: 4px;
+  background-color: var(--painel);
+  text-align: left;
+  color: white;
+}
+
+.limpar {
+  padding: 6px 12px;
+  background-color: var(--acc);
+  color: #031525;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--muted);
+}
+
+.sort {
+  border: 1px solid var(--acc);
+  border-radius: 4px;
+  background-color: var(--painel);
+  text-align: left;
+  color: white;
+  padding-left: 4px;
+}
+
+.text {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.fav {
+  padding: 6px 12px;
+  border: 1px solid var(--muted);
+  background: var(--painel);
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  margin-left: 110px;
+}
+
+.fav:hover {
+  transform: scale(1.06);
+}
+
+.fav[aria-pressed="true"] {
+  background: yellow;
+  border-color: transparent;
+}
+
+.hidden {
+  display: none !important;
+}

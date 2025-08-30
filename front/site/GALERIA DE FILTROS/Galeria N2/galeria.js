@@ -1,53 +1,88 @@
-const filters = document.getElementById('filters');
-const cards = [...document.querySelectorAll('.card')];
+// Seleção de elementos
+const filterButtons = document.querySelectorAll('.pill');
+const searchInput = document.querySelector('.buscar');
+const sortSelect = document.querySelector('.sort');
+const clearButton = document.querySelector('.limpar');
+const cards = document.querySelectorAll('.card');
+const counter = document.getElementById('counter');
 
-const buscarInput = document.querySelector('.buscar');
-const limparButton = document.querySelector('.limpar');
+// Função para atualizar a exibição das cards
+function updateGallery() {
+    const activeFilters = Array.from(filterButtons)
+        .filter(btn => btn.querySelector('input').checked)
+        .map(btn => btn.dataset.filter);
 
-let active = 'tudo';
+    const searchText = searchInput.value.toLowerCase();
+    const sortValue = sortSelect.value;
 
-function apply() {
-  cards.forEach(card => {
-    const match = active === 'tudo' || card.dataset.category === active;
-    card.classList.toggle('hidden', !match);
-  });
+    let filteredCards = Array.from(cards).filter(card => {
+        const title = card.querySelector('strong').textContent.toLowerCase();
+        const category = card.dataset.category;
+        const isFavorite = card.querySelector('.fav').getAttribute('aria-pressed') === "true";
+
+        const matchesFilter = activeFilters.includes(category);
+        const matchesSearch = title.includes(searchText);
+
+        return matchesFilter && matchesSearch;
+    });
+
+    // Ordenação
+    filteredCards.sort((a, b) => {
+        const titleA = a.querySelector('strong').textContent.toLowerCase();
+        const titleB = b.querySelector('strong').textContent.toLowerCase();
+        const favA = a.querySelector('.fav').getAttribute('aria-pressed') === "true" ? 1 : 0;
+        const favB = b.querySelector('.fav').getAttribute('aria-pressed') === "true" ? 1 : 0;
+
+        if (sortValue === "az") return titleA.localeCompare(titleB);
+        if (sortValue === "za") return titleB.localeCompare(titleA);
+        if (sortValue === "fav") {
+            // Favoritos primeiro, depois alfabeticamente
+            if (favB !== favA) return favB - favA;
+            return titleA.localeCompare(titleB);
+        }
+    });
+
+    // Atualizar visibilidade
+    cards.forEach(card => card.style.display = "none");
+    filteredCards.forEach(card => card.style.display = "block");
+
+    // Atualizar contador
+    counter.textContent = filteredCards.length;
 }
 
-filters.addEventListener('click', (e) => {
-  const btn = e.target.closest('.pill[data-filter]');
-  if (!btn) return;
-
-  filters.querySelectorAll('.pill').forEach(b =>
-    b.setAttribute('aria-pressed', 'false')
-  );
-  btn.setAttribute('aria-pressed', 'true');
-
-  active = btn.dataset.filter;
-  apply();
+// Eventos para filtros
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const checkbox = button.querySelector('input');
+        checkbox.checked = !checkbox.checked;
+        updateGallery();
+    });
 });
 
-apply();
+// Evento para busca
+searchInput.addEventListener('input', updateGallery);
 
+// Evento para ordenar
+sortSelect.addEventListener('change', updateGallery);
 
-
-function filtrarImagens() {
-  const buscaTexto = buscarInput.value.toLowerCase();
-  cards.forEach(card => {
-    const titulo = card.querySelector('.meta').textContent.toLowerCase(); 
-    if (titulo.includes(buscaTexto)) {
-      card.style.display = 'block';
-    }
-    
-    else {
-      card.style.display = 'none';
-    }
-  });
-}
-
-buscarInput.addEventListener('input', filtrarImagens);
-
-limparButton.addEventListener('click', () => {
-  buscarInput.value = '';
-  filtrarImagens();
+// Limpar filtros
+clearButton.addEventListener('click', () => {
+    filterButtons.forEach(btn => btn.querySelector('input').checked = true);
+    searchInput.value = '';
+    sortSelect.value = 'az';
+    cards.forEach(card => card.querySelector('.fav').setAttribute('aria-pressed', "false"));
+    updateGallery();
 });
 
+// Favoritar imagens
+cards.forEach(card => {
+    const favButton = card.querySelector('.fav');
+    favButton.addEventListener('click', () => {
+        const isPressed = favButton.getAttribute('aria-pressed') === "true";
+        favButton.setAttribute('aria-pressed', !isPressed);
+        updateGallery();
+    });
+});
+
+// Inicializa a galeria
+updateGallery();

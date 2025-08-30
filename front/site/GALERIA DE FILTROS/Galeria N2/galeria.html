@@ -10,19 +10,33 @@
 
 <body>
     <div class="wrap">
-        <h1>Galeria com Filtros — Lite</h1>
-        <p class="muted">Clique em uma categoria para filtrar os itens.</p>
+        <h1>Galeria com Filtros — Intermediário</h1>
+        <p class="muted">Marque 1+ categorias, busque por titulo, ordene e favorite as imagens ⭐</p>
+
 
         <!-- Botões -->
         <div id="filters" class="filters" role="toolbar" aria-label="Filtros">
-            <button class="pill" data-filter="tudo" aria-pressed="true">Tudo</button>
-            <button class="pill" data-filter="natureza" aria-pressed="false">Natureza</button>
-            <button class="pill" data-filter="pessoas" aria-pressed="false">Pessoas</button>
-            <button class="pill" data-filter="cidades" aria-pressed="false">Cidades</button>
-            <button class="pill" data-filter="animais" aria-pressed="false">Animais</button>
+
+            <button class="pill" data-filter="natureza" aria-pressed="false"><input type="checkbox" value="natureza"
+                    checked> Natureza</button>
+            <button class="pill" data-filter="pessoas" aria-pressed="false"><input type="checkbox" value="pessoas"
+                    checked> Pessoas</button>
+            <button class="pill" data-filter="cidades" aria-pressed="false"><input type="checkbox" value="cidades"
+                    checked> Cidades</button>
+            <button class="pill" data-filter="animais" aria-pressed="false"><input type="checkbox" value="animais"
+                    checked> Animais</button>
 
             <input type="text" class="buscar" placeholder="Buscar por título...">
             <button class="limpar">limpar</button>
+
+            <select class="sort">
+                <option value="az">A → Z</option>
+                <option value="za">Z → A</option>
+                <option value="fav">Favoritos primeiro</option>
+            </select>
+
+            <p class="text">Exibindo <span id="counter">0</span> itens!</p>
+
         </div>
 
         <!-- Galeria -->
@@ -31,57 +45,74 @@
             <article class="card" data-category="natureza">
                 <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop"
                     alt="Montanhas ao amanhecer" />
-                <div class="meta"><strong>Montanhas ao amanhecer</strong><br><span class="muted">Natureza</span></div>
+                <div class="meta"><strong>Montanhas ao amanhecer</strong><br><span class="muted">Natureza</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
 
             <article class="card" data-category="natureza">
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5oxPH4mnnQQE7qxUntqL7bSXfbGELN3vMHQ&s"
                     alt="Floresta densa" />
-                <div class="meta"><strong>Floresta densa</strong><br><span class="muted">Natureza</span></div>
+                <div class="meta"><strong>Floresta densa</strong><br><span class="muted">Natureza</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
+
             </article>
 
             <!-- Pessoas -->
             <article class="card" data-category="pessoas">
                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop"
                     alt="Retrato urbano" />
-                <div class="meta"><strong>Retrato urbano</strong><br><span class="muted">Pessoas</span></div>
+                <div class="meta"><strong>Retrato urbano</strong><br><span class="muted">Pessoas</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
 
             <article class="card" data-category="pessoas">
                 <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop"
                     alt="Estudo e foco" />
-                <div class="meta"><strong>Estudo e foco</strong><br><span class="muted">Pessoas</span></div>
+                <div class="meta"><strong>Estudo e foco</strong><br><span class="muted">Pessoas</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
 
             <!-- Cidades -->
             <article class="card" data-category="cidades">
-                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
+                <img src="https://images.unsplash.com/photo-1724997556941-ebb37488551f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bm9pdGUlMjBkYSUyMGNpZGFkZSUyMGdyYW5kZXxlbnwwfHwwfHx8MA%3D%3D"
                     alt="Noite na cidade" />
-                <div class="meta"><strong>Noite na cidade</strong><br><span class="muted">Cidades</span></div>
+                <div class="meta"><strong>Noite na cidade</strong><br><span class="muted">Cidades</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
 
             <article class="card" data-category="cidades">
                 <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200&auto=format&fit=crop"
                     alt="Arquitetura moderna" />
-                <div class="meta"><strong>Arquitetura moderna</strong><br><span class="muted">Cidades</span></div>
+                <div class="meta"><strong>Arquitetura moderna</strong><br><span class="muted">Cidades</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
 
             <!-- Animais -->
             <article class="card" data-category="animais">
-                <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200&auto=format&fit=crop"
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQA8AMBIgACEQEDEQH/xAAcAAAABwEBAAAAAAAAAAAAAAAAAQIDBAUGBwj/xAA/EAACAQMDAQYEBAUBBgcBAAABAgMABBEFEiExBhMiQVFhFDJxgSORobEHFWLB4VIzQnKCktEkJUNUovDxFv/EABgBAAMBAQAAAAAAAAAAAAAAAAABAgME/8QAHhEBAQEBAQADAQEBAAAAAAAAAAERAiESMUEDUSL/2gAMAwEAAhEDEQA/AN/mlA80WKUBUrN3Higce1cn1AG3v7mFTwshxXW5B+G3uK5F2jJTXbkAdWz9qmqh61VpGSMcvI20feun6XBBpdlFCPTlj5msj2J0o3LrqEwyAfwwf3rValF3soTJKqoOM4zRb8YnPlcWDOH6H70uPrWUuGvNLbvrZndejRscg1daPrFvqIwPwph1jb+1HPUt9PrixbijpI4z7UdasyhQoCiJUDcaQJllWKNnc4VRzWcklOoSPJJllz4AegH0qTqt5FNcGFziOLB/4m/x+9Ryzkd4CBjoPSsev+rjbmfH39HaH4bU4tvAY7cD3rSVk42ea+tveVcfY5rV5xT/AJ+F/X8KpDtgZpLybRmozzZrRngpZmY4FMbSetLBo6Svo3sojGKdxRNxQNR54xs6CqLVtRt9KtpJpmwFGas766dAwVScjyrnv8QJtmmSd5yX4FZ9NudzWVudSl17VGuHJ2Zwi+1db7I2ItdPTgcj0rlfZGw7+7RR0BBrtunR93bouMYFVzGPV1OUYAoz0owKGQDVoJYUhulLNNucc0AujoYxQpLCT/ZkVyTVYpNT7XSWyLjDgEjyFdabBU/Ss7pulQQaxeXpUF5SBzQervT4FtLWOJAAFUAYFKuCUZJOoKlSPvQBPFODDKVPn+9T1Ng58qPIizDOQR5jNZ3UbEbi0BMbofCyMQwP5fpV3Ofh28eFOOgPWqqS6e8DuE2xjILDjA86x/G2fo7HtV3EB/mDDdEQGcD5gehx9qel7X2TvPGkwJiieXu14dwoycA8+lZDULUPNIbeYO+0lDFySMZI6YzwTVH2djd+1c8sr95dQ2bbg+MNu459hnP2q+erfGXUjWr2lurT4p55jiOFrhVDcDG3KMf+YEH2NXNt2iEndyRp3sTf77SjJ6dB6Vi9DAvLqKzuAj2yRMkuw+Fmxhh+WSMehqs7OTs81xaRl4ra2nYWxY54z8uc/wBP5UXcEzW1sbyeae4kcsA0hABAO0eRqymvBFEqTHAPAYD96zay30DKlrdxLGp8R7sMSf8AT9fM/wDF7VN/mQuAYpLYISpw5HEh9vQ81O5F/dXOk3MU2pQbWBUEjA8uMg1qHGR1rnHZnWI31TbhXdmAKqMbcV0gAlFbyIrT+f0j+nnXhsqcUju80/0oAjzrRJjZRFaeYiknBFIGaJxTh4pmQ8UErdWnS2geRhnaua4RruuT61qDbztgVztT2rsXaeUCxuNzcBCDXDtPi7y6IUZy396ifdaW5I6T/D/T+khGc11CBQEArK9j7L4fT4yQM4rWxjwirkZWl9KI4xR4zREcYpkBpmU8U43FMPmgH80AaKgOKSxnpUEkLMVx1NTs1XXGVnBPSlVSJaHNOjrUeI1IHWnKVUnaq6WziS7LDaFwck4BFUmXuIEtxtWADccHcWJ5BGemK1+oWdrd26/FxBkRwwU9CR0qh1HW9G0ebuLm4VJ2PEMSMzk+gCisOufWnPX/ADiDYwrJ8QLSIoUQyDcOXYHPH69Kx73E62uldo44xsFzNb3CoAcoW25+mf7Vr9Y19oBc3UNge7s1w25tkg8OemPT/NRo7O01HS57S0he0aUG5a2mwwbPUjHBGetPnIi+3GMszdWl+3iLRxpIkWFxuZ165HoP3o/5fLp/Y22khAkuvig5x5F/Bj68qPqB6VePAUixkMmBxnAJ4B46fb3q1tXtdG0iCR2jW4upe7iDkEKcnJx9s1XyLEDUNOupbuERTPbRJCBkNne/n9uPvTlvDIry24kyUPzEADPUY/T86gXVgJJ9RS+SS8lunUWjStncSOgHlg8n0pjtN2fsbu+MdletFPGAo2szIGUc4H2P0qMnSpsnq40/T4o78XMESxagjEybSQsvr9/eum2bs9rHu67RkVxXs3qV21yLPUJyL+2xtDgfiIMffNdh0WdbqyUq4YrwxX1rTjzxHX3qfgGhtFHtx50knFaJEUWkMuOlGX9qQzZoOG3600+MYpxyKiznCfalTjHdt7uG00y4aVh4hgDNc07JWvxN7CADhmyfatP/ABSlzbRRAf79F/DexLS98V6YxURfbp+mQCKFFAxgCrRelRrdMLj0qSDxWjEoUknFGKS1AIdqhX86xQsT6VKbms9r0rFWRWCjbyfSkGjLUM0WKFCx1C1LCqG9DUo1F1EZtmPpS6+lc/YoJcgc1MRs1S2M+5FFW0RqearuYGpTrb2JmZSdhyFHmfKsXoumgnUdTeDddzyHu2IJK89OnFbvYkwCydAQ1UOoXtpZXVxL3t1nO3ZAuRnH70u4nmsvqU8U7SzXSm3kZNko2d5HMB6r1z7imZZprHUtHuluEmjebulSCJl2rjBBLexzj2q4sdNkurt5Ql4IdoYtdYBkJHoOnlTt/aWc6GBxukSJjEoHC+X1zUWZ6uXS9QtEiQGGNAmOSRk1iO1158TcaVCyI6wSEvEecqSOcfb9TUzUu1MFlb2ljK1wZYoQXO3OW/0n0qv7PZv9TudVuLGQW/d/MVz09AOtRL1u36XZzIvmtJiztZWy20BUBZEl3My+mTyM88A1WR3FpAkkDBrSFjtd5odgUE84z1PoBWp0RpJ1xcwxxLz/AEk+IgDbn0xSdX7N2Uqyq9r3qycsvG7PsSePtWmMmYXs9FqYuYluGuJ4lUwXakZ2lcrk5+1dB7BLcw9nYBeDE7ZLjI4OfasPF2fTT72OPSr6eGR12uknjBH+K066tHo3wNpCweVwV254OOSevFXzfU9Rs95B6GgJD7isdD/ELTviO5uVaKTOArA1dW3aCyuhlJR9q0RVwXptiKYW5ikHhbdTgORQqEMM1GuziM49Kks3NVupzFUIUcnpU9fSuZtcq/iRdxtdRWq+J92TWu/h7aCLS0cjxMM1ge1MZn7TbTyTgV1zs3afD6fDH6AUuZ4X9PteR8KM07SB6UurZjyAKS/SgaQ1ANTMFTI61he0OplZDDGpZ5pAoA9zitbqtx3ELnOOOtYXszjW+2YaNt9vZgyOfLd5UqHSB4utH0pAbHWkl8mhZZNR7rxQuPalk0jnBOAfrU36OKWx3d4VA4B5q7hcAAKetZGW726rMhcnB4GeBV5a3BZVOay4rf8Apz5q/g2kMCRyCKgzxLaW7sYc7cncvOfT6/SlRd4cPHtLp1z5U+8qTD5jH18L45+1a9Of6VOl6nA7L35khZnAAl4Zj9M9fb9qY7QW0i3KXSu5AIZT3cbYxk8HrUq/0WO6IGVzzlhkHHoPSkxxX1qG7zu54iMLE3+7zx+lRZcVLlZbtDoa9orTunhYPH4hOmFJPTpjoR/apLIPhlsYY+7ijUKqo7A4xxnAz+tbBdgjOE7veORnzqt1CaCwjeZU3SYOPqKzvFyKne1U2UMWmW7XE792pBPdxoFyckk+ZPUnk1RTXt1rFxI9y8ttZoPCEOS3X5gQc/UVVazrkz6gl7OAEQBfxDj8hUCa6utUYLaysyA8yBduA3IIxyfQg+lX9kvbrWGtLZWtFifaPCIvmbj9D7HNUWmRTanfDVtSR7XuchfMDr1U/Kff9KVHaWekwPLfOk0zMQEI8LkcgkDz/q61JfUDco1va4uhMQAYxgoP9PuPrVySfSaj9qdNku4Yb203tIiYkAYEEetZ/Tb29tbpIu8aHJx4icZrpMUEFlpkFsANuzluARnyPp1rnnaSw+DlSWJy8LndHvY7hVsp1txqbLtBrmjXaC+ieS125JA8q2mhdrrW+wFLLkdD5Viex+pNqVrJY3jSTMqnaw8hjqf81UawraDfKLSSQwEB43PGW5yTSnX4q8/47hHcxzIJEIb6VWapcbc7RmsJ2Q7VSSHu5JMMOua1lxe/gMzKCHHDr50dS4rjqb65nZxSXna2XvDubvfyFdqsI9kCD0Fcs7I2EkvaKSeVCPGWz966zbjCgelHJdfaQnSl0gUZNUkCRTUjgIeaWelRLltqHNAZLtm808DRJLsU9dvXFTv4daGuk6S8/WS6O4t7eVVHaMS3F1FZxHLSSKv2863tvCttbQwRjCogAqZ9hXfGqxIDUr4hVXJPNVTT7BhbZ/yqJdXdztPd2rlvLNL1rsX/AMRH1J4pEl/F8oOM8VkZrzU8eCyOaq21HXY5z/5cxXPUEVO1U+P+tBrmkhT8daHx9WGetN6drEJZII3DSHqw8j5j/NKt9UuJLJ0mt2VivFYy3sNTt1mnNu7SzykRxZ4bJwoPoM8n2A9amce6u/08x2fQ5UeyMoAbd0/qFHfW9pJmSVEZj6nofWqDsmt7LpMytv71XO0tgFh03cevX7+VU/ajVdc02VGjXciNnfEhOBnk4zzV9XxjzNrW2bG1hSPvWeM8BpG8X+ankh1IGD/auT3PbeS1WOe7tJWkbvAqdAqg8Zz59KtbL+IFoRF8Q4RyuXGR4PY+9OWlY6CyBlwfLpmoGqlIbSWXapZVyMjNRtP1+zvo8xSq3qVORWd7YdpY4oPhrQNNcP8ALHFyceZ+nSjrMLndYPWIRdXb3up/hoc7I9/z+g/TpUVdbJjeKwt2aAHYBjnYfL7Hp9qlW+gSXJN9rLrCp8Xdl1zjP1qwhudKslX4KASw7gHMa7myAPL659c1E6n40sZm303UtRuyquZXLEeJxz9jWq06yseyayXF2xubpogPh8DP0I5x96m2t9qF66ra2gtlOd07xcgfsDVVd7YZmgsooLm9IxPPKQNqA46Zxj6E091N8WumM2qXEYjVlhXJOGHhzyfuKhdr9Jea2R4DGw3sXY/T8/T86Rookjgxps0qKzfiTHlQR6HzHl96mapdB7uZBCAyxhmwOJOoJ9cdK0jG+XWS067WE28scKbo/n3Hg+2PP71sNZtLe/0uOWKN53cZWOAfKayur21vAC1jwj4LDPCn0qd2L1SZZ2tZpZO7XO2MZO4+mKmzPWk61QW0slldd7jBU8oM+tdB0bV4T+ELgSgjIyelZztbpbWtwbiJZO5dcuHTBUnnFU1ncyx5CsRsHGacqby6O+q2+mzrKE7vPO9RkNWy0fVIdTthNAyk45ANcjsdX+Ltzb3Lghh4QRR6ZrlxoN8JIiRDuw0Y8xVE7ejcc0bHNV2k6hDqVmlzC2Q4zUzJzQZzy61AvpAEx5k9KmM2EzzzVNqlwUHGCegzQEbSbQT633zgERDOT61qHJz7VVdn7fu7RpWHikNWZPGKUBhrYHrSfhFI6CphXNJwBxirShGxTOdo+1JNkh6gCrED0pJFAV38vj/0g/WkNYx7slRn6Va7QfKiKj0o8CPp4FsSEXGfL1pOpQxyAF1U+hIzUgjHSm70I0RZF3OoOAeOaz/pPF8XKxOp2Vi0hEkW4bzwTn3JJ6fas/fdnNOkBmaIxjoFAHWrq/tbpNSB2sFQEjnhmPHTB45z+dUd7qrtGZZ4DGgl4BHJHrz744+tc2X8dMxH+DuNKVlgeRkbB2jrlc1K0lbe1e4uJvHdTfM7dQg+bz45qqtdaup3lLIQvJ2+uMYP55o9OjEzKJt8smGbO4nAyOgx096d39L98Sb9Tqrd88ncaah2jI295yefpyKhPf6dbRypHsDquAxTknz98fTNK1q31vUVMcFkfhl8AQc++eD6k1UwaBqBnPxdpcFi3y7Tnn3queZhddX8S7jtXdSeCONdpQIvn+lSNKsC1nL8U4gu5/8AZhupA6++D0q3sex9zKnFhtA6NKQM46HH/wCUL3s1d280s91qMdvvQqBHlioz6+lXsZo3xYEa6bZTxQJGuJcgnPnkceR96rG1ZbaSaB3S7J5WUHuwP7irCPs1p93aoBqpWUlvnXwjPA+/7nFZ3VNHfTrx7Jd5kUdXx+Lz1HpgferialPex3caxuxyjZWNzkHPoev51WRNNbX6yR+CRGz16ikQywIzJPC7HzkEniH0GMVc3dlaXtkkljcs7Y8QK4dSB5+1NLWaHPa67pDwDc7BvxIwfED6g1hNUtX0/UpYZA48wHxnHvin+y+pT6XeAopKMMuAev8AkVY/xBixfW8kfKPEHxt8z7+dKKZqOZkbCnABp+4m+IXcT4sYqJAqvKofgE4pbgxMFZTkHmmWOhfwv1vZJJptw55GY8/tXUVPhFcD0NjaapbTDwsZAFH9JruVtKXgU559RRop66kITCnmqHVJCFUnxMDnFWlzNgVTySK90ozklgtFDS2SFLKFf6eacJ4oM4VQBwAKjPLTJYb+DSQ1Rdlyf/TP6UtI7gDmM/mKpKQWot1Nd1c/6ftmld1cY+X/AOVAL3igWpkw3Xkg/wCqktBdMB4QD9aAdLZpkvHapLPcsNjEeWcD1+lSba3cODN08wKzeuakYLG9kc4EcrAoR0AA6Y8qju5F8TVpay6c5lKTRu8Z8TMRuX7eVUXa62N1a91bpA29wCMcjd7+X+KwWsalsu47yCVYbrGG70+HcfP9TQ1btNHLCN8qzM6ESxjHUdD+eDWWStdxtuz/AGVsdKjVropduBlnlQEA54Aqz1H4No5o2t49yLkqMZx+XSqjs92hS40GGSaTMhUB225/+iqXU9bCXSiTc6ykqG420sGpEfaPS9L1ONba1jfnbOyv8g/L1qTN2rZbF78KMqrDwt4cDpkEVhe090LFlSEBJbjxMxxkKOgz5UrTXU9nZIWOXZSPU5JzxVfHzS1f2/bK8vdPNwx2yMwDBCQB9KympatcXck0qu8ckcgdBuJAGOeKtdOt4rW2jt0YLKF3lseZPn6j/tWc1SJlMrsxwu1Rk5JOPOqkhWtBps1tHp8k4l278MRJ4gGP7ZNQe00/fiCTvCZIwDlmOefb8+aY0qeCPRbozorFx3K+XuOfrSdVKyaJZscbwu0E+1EmUr6rrkq6xShFD48W3z+1WNvcBLUFAN2OR1IPrVZ3hW1RGbAyWGcHH2NFuPdcHkdQDVpWMgK3yCHYVnIlR9vQN1GK02vRmWy03vVLNhl4HJzWQSZi1luY4Rc++MmtFr128dvYmDK5BKAtwSfbyqKbLTxvb3bJuBKnHFWepFSsUmFzLHkhfWqaZ2E7h8lycmpRupJokhkRyiLhQF86rBsT7y6imuLTulZGQKGyfOuxaJdiSxhO/J2jNcX0SF59QhWeJxHuGWZTwK63ZWCQxI1leow6lNw59qJCtiw1KfbCxIx6msvZ6tHJ2ks7OMnJYE/lVj2guStvn5WUdM8Vh+zl8rdsreSQgnccflRYW+OwTXXjIyKi/EDfyeKy2q6z3Fy2WIGCajW2q/EyKVYnkdT5VSPk63k0VAUKZjzQoiKKgDos0YoY5oAiwUFjk/SuQ9q9XfStdvlkjkkilYMVK+3ka69wPKm5IIZVxLGjj0Zc1PXOq56x5k1eZLidDAXZCgOzrtbzA9qgrHJJ8kbNjgYWvT7aRpzEk2Vvn17sU0ez+lf+xgH0WjBa8/aPqFzZzAyW87DGNqoelW8mpRTAM0E2V+TvIG4++PX9q7Yuiaavy2kQ+i06NNtVHhiUfaleNOd48+6y0GoMskgKOExnYck/9qfh1KFLWCGTJEbAL4DkV3s6baN80EbH1Kim20exPW1h+6Cj4j5uEnWomyNk2TnnYc881X3tz8Wkyi3l3PyAUPX6/nXoJtB0xmybKE/8gpv/APn9LBP/AIOL/po+JXp55Fvey2iWsVm+0MX6edPDR9WvCo+EmMY8sYFeghotlHzHCqn2FA6Vb5yqkYGAM8VUidv+OGR9i9cumBMKRL0G9vKrK2/hzdHBudQjjPoiZrr50yMHqcegNI/liY46H1qsibenObTsBDEymW9lZgm0YUKR51dr2ZsjHGsqd8Yl2oX5rVHT1yD5jpQFmB0JFGQr8mbi7PWkPC28K45yAKc/k8W4fhqB64zV+bUKABk+fpRGFuNjEAH1pp9UK6QhPCA8Enyok0hFB8JUHnitEY24PTjHTrRbGA5wP1pYqazv8qjdWDRsfzNMJ2dsI7iO4FsomQ5EgGDmtSBt6456YoiPIg59qMGslqHZaG9LlpJUdhzjkGqyLspf2UjG2uY5F8kcYNb8xrjrQ7pTSwL8UVChTWBoChQoAyKLNChQB9aTQoUAqi60KFAGBR4oUKAIURA9KFCgAaLFFQoAbRRbRR0KRiKg9RRFFx0o6FAJ7pfSmygzmhQoIkoATRbFPlQoUwQYk9KSYlHQn86KhQQu6UHzP1pp1BfFChQQzGvpRFABjyoUKaX/2Q=="
                     alt="Gato" />
-                <div class="meta"><strong>Gato</strong><br><span class="muted">Animais</span></div>
+                <div class="meta"><strong>Gato</strong><br><span class="muted">Animais</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
 
             <article class="card" data-category="animais">
-                <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200&auto=format&fit=crop"
+                <img src="data:image/jpeg;base64,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"
                     alt="Cachorro" />
-                <div class="meta"><strong>Cachorro</strong><br><span class="muted">Animais</span></div>
+                <div class="meta"><strong>Cachorro</strong><br><span class="muted">Animais</span>
+                    <button class="fav" data-filter="favorito" aria-pressed="false">⭐</button>
+                </div>
             </article>
         </main>
     </div>
 
 </body>
-    <script src="galeria.js"></script>
+<script src="galeria.js"></script>
 
 </html>
