@@ -15,8 +15,16 @@ button {
     padding: 8px 16px;
 }
 
+img {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+
 #container {
     margin-top: 20px;
-    border: 1px solid white;
+    border: 1px solid rgb(27, 11, 11);
+    background-color: rgb(139, 139, 139);
     border-radius: 6px;
+    text-align: center;
 }
