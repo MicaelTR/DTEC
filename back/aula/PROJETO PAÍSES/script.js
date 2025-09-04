@@ -2,11 +2,11 @@ const bntEnviar = document.getElementById("enviar");
 const paisEscolhido = document.getElementById("digitar-país");
 const resposta = document.getElementById("container");
 
-bntEnviar.addEventListener("click", () => {
+function buscarPais() {
     const pais = paisEscolhido.value.trim();
 
     if (pais === "") {
-        alert("Por favor, Digite o nome do país");
+        alert("Por favor, digite o nome do país");
         return;
     }
 
@@ -27,23 +27,32 @@ bntEnviar.addEventListener("click", () => {
 
             const paisInfo = data[0];
 
+            const nomePaisEmPortugues = paisInfo.translations.por ? paisInfo.translations.por.official : paisInfo.name.official;
+
             const moedas = paisInfo.currencies ? Object.values(paisInfo.currencies)[0] : null;
             const nomeMoeda = moedas ? moedas.name : "Não disponível";
             const simboloMoeda = moedas ? moedas.symbol : "";
 
-
             resposta.innerHTML = `
-                <h1>${paisInfo.name.official}</h1>
+                <h1>${nomePaisEmPortugues}</h1>
                 <p><strong>Capital:</strong> ${paisInfo.capital ? paisInfo.capital[0] : "Não disponível"}</p>
-                <p><strong>População:</strong> ${paisInfo.population}</p>
+                <p><strong>População:</strong> ${paisInfo.population.toLocaleString('pt-BR')}</p>
                 <p><strong>Moeda:</strong> ${nomeMoeda}</p>
-                <p><strong>Simbolo da moeda: </strong> ${simboloMoeda}</p>
-
-                <img src="${paisInfo.flags.png}" alt="Bandeira de ${paisInfo.name.official}" style="width: 200px;">
+                <p><strong>Símbolo da moeda:</strong> ${simboloMoeda}</p>
+                <img src="${paisInfo.flags.png}" alt="Bandeira de ${nomePaisEmPortugues}" style="width: 200px;">
             `;
         })
         .catch(error => {
             console.error(error);
             resposta.innerHTML = `<p>${error.message}</p>`;
         });
+}
+
+
+bntEnviar.addEventListener("click", buscarPais);
+
+paisEscolhido.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        buscarPais();
+    }
 });
