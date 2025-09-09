@@ -1,9 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
-const PORT = 3000;
+app.use(express.json());
+app.use(cors());
 
-app.use(PORT , () => {
+const PORT = 3001;
+
+app.listen(PORT , () => {
     console.log(`Servidor rodando na porta ${PORT}`)
 });
 
@@ -14,6 +18,14 @@ let usuarios = [
     {id: 1, nome: "Micael", idade: 16}
 ]
 
-app.get("/usuarios", (requisito , resposta) => {
-    resposta.json(usuarios)
+app.get("/", (require , response) => {
+    response.send("Testando a API")
+})
+
+app.get("/usuarios/:id", (require , response) => {
+    const id = require.params.id
+})
+
+app.get("/usuarios", (require , response) => {
+    response.json(usuarios)
 })
