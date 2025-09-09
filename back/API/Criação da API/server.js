@@ -24,6 +24,9 @@ app.get("/", (require , response) => {
 
 app.get("/usuarios/:id", (require , response) => {
     const id = require.params.id
+    const usuario = usuarios.find(user => user.id == id)
+
+    response.json(usuario)
 })
 
 app.get("/usuarios", (require , response) => {
