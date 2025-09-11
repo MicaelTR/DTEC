@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 
 let usuarios = [
     { id: 1, nome: "Micael", idade: 16 },
-    { id: 1, nome: "Micael", idade: 16 },
+    { id: 1, nome: "Micael", idade: 20 },
     { id: 1, nome: "Micael", idade: 16 },
     { id: 1, nome: "Micael", idade: 16 }
 ]
@@ -64,4 +64,33 @@ app.post("/usuarios", (require, response) => {
     };
     usuarios.push(novoUsuario)
     response.status(201).json(novoUsuario)
+})
+
+app.get("/usuarios/idade/:idade", (require, response) => {
+    const idade = parseInt(require.params.idade)
+    resultado = usuarios.filter(user => user.idade === idade)
+
+    if (resultado.length > 0) {
+        response.json(resultado)
+    }
+    else {
+        response.status(404).json({ mensagem: "Nenhum usuário encontrado com essa idade selecionada" });
+    }
+})
+
+app.put("/usuarios/:id", (require , response) => {
+    const id = require.params.id
+    const nome = require.body.nome
+    const idade = require.body.idade
+
+    const usuario = usuarios.find(user => user.id == id)
+
+    if (!usuario) {
+        return response.status(404).json({ mensagem: "Usuário não encontrado" });
+    }
+    
+    usuario.nome = nome || usuario.nome
+    usuario.idade = idade || usuario.idade
+
+    response.json(usuario)  
 })
