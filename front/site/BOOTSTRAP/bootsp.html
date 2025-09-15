@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <style>
+        /* Variáveis básicas para facilitar mudanças de cor */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --light-gray: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        /* Estilização geral do body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header com espaçamento extra */
+        header {
+            margin-bottom: 20px;
+        }
+
+        /* Navbar personalizada */
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--dark-color);
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Carrossel: arredondar cantos e sombra */
+        .carousel {
+            margin-bottom: 30px;
+        }
+
+        .carousel-inner img {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        /* Classe para simular colunas para uso posterior */
+        .col-sm {
+            background-color: #e9ecef;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        /* Classe customizada para destaque */
+        .custom-col {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+        }
+
+        /* Responsividade e ajustes gerais */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                text-align: center;
+            }
+        }
+
+        header {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header class="bg-light w-100 py-3">
+            <div class="container d-flex justify-content-between align-items-center">
+                <h1 class="mb-0" style="font-size: 1.8rem;">DTEC Store</h1>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Catálogo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Contato</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://via.placeholder.com/800x400?text=Primeiro+Slide"
+                        alt="Primeiro Slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="https://via.placeholder.com/800x400?text=Segundo+Slide"
+                        alt="Segundo Slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="https://via.placeholder.com/800x400?text=Terceiro+Slide"
+                        alt="Terceiro Slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
+        </div>
+
+    </div>
+</body>
+
+</html>
