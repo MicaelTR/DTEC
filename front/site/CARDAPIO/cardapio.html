@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio de Produtos</title>
+    <link rel="stylesheet" href="cardapio.css">
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="logo-container">
+            <img src="smash.png" alt="Logo Rei do Smash">
+            <span class="logo-text">Painel do Administrador</span>
+        </div>
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Cardápio</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Configurar</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1>Cardápio de Produtos</h1>
+        <p>Clique em "Listar Produtos" para carregar os dados</p>
+
+        <div class="header-buttons">
+            <button id="btnListProducts">Listar Produtos</button>
+        </div>
+
+        <!-- Seções Fixas por Categoria -->
+        <div id="product-cards-container">
+            <h2>Bebidas</h2>
+            <div class="cards-grid" data-categoria="bebidas"></div>
+
+            <h2>Sanduíches</h2>
+            <div class="cards-grid" data-categoria="sanduiches"></div>
+
+            <h2>Sobremesas</h2>
+            <div class="cards-grid" data-categoria="sobremesas"></div>
+        </div>
+
+        <h2>Adicionar Novo Produto</h2>
+        <form id="addProductForm" class="add-product-form">
+            <input type="text" id="productName" placeholder="Nome do Produto" required>
+            <input type="number" id="productPrice" placeholder="Preço (R$)" required step="0.01">
+            <input type="text" id="productImage" placeholder="URL da Imagem" required>
+            <select id="productCategory" required>
+                <option value="" disabled selected>Selecione a Categoria</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="sanduiches">Sanduíches</option>
+                <option value="sobremesas">Sobremesas</option>
+            </select>
+            <textarea id="productDescription" placeholder="Descrição do Produto" required></textarea>
+            <button type="submit">Adicionar Produto</button>
+        </form>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="editModal" class="modal" style="display:none">
+        <div class="modal-content">
+            <h2>Editar Produto</h2>
+            <form id="editProductForm">
+                <input type="hidden" id="editProductId">
+
+                <label>Nome:</label>
+                <input type="text" id="editProductName" required>
+
+                <label>Preço:</label>
+                <input type="number" id="editProductPrice" required step="0.01">
+
+                <label>Imagem (URL):</label>
+                <input type="text" id="editProductImage" required>
+
+                <label>Categoria:</label>
+                <select id="editProductCategory" required>
+                    <option value="bebidas">Bebidas</option>
+                    <option value="sanduiches">Sanduíches</option>
+                    <option value="sobremesas">Sobremesas</option>
+                </select>
+
+                <label>Descrição:</label>
+                <textarea id="editProductDescription" required></textarea>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-save">Salvar</button>
+                    <button type="button" class="btn-cancel" id="btnCancelEdit">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="cardapio.js"></script>
+</body>
+</html>
