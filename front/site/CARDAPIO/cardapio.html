@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio de Produtos</title>
     <link rel="stylesheet" href="cardapio.css">
@@ -24,15 +25,14 @@
         </nav>
     </header>
     
-    <div class="container">
+    <main class="container">
         <h1>Cardápio de Produtos</h1>
-        <p>Clique em "Listar Produtos" para carregar os dados</p>
+        <p>Clique em "Listar Produtos" para carregar os dados.</p>
 
         <div class="header-buttons">
             <button id="btnListProducts">Listar Produtos</button>
         </div>
 
-        <!-- Seções Fixas por Categoria -->
         <div id="product-cards-container">
             <h2>Bebidas</h2>
             <div class="cards-grid" data-categoria="bebidas"></div>
@@ -46,44 +46,53 @@
 
         <h2>Adicionar Novo Produto</h2>
         <form id="addProductForm" class="add-product-form">
-            <input type="text" id="productName" placeholder="Nome do Produto" required>
-            <input type="number" id="productPrice" placeholder="Preço (R$)" required step="0.01">
-            <input type="text" id="productImage" placeholder="URL da Imagem" required>
+            <label for="productName">Nome do Produto:</label>
+            <input type="text" id="productName" placeholder="Ex: Refrigerante" required>
+
+            <label for="productPrice">Preço (R$):</label>
+            <input type="number" id="productPrice" placeholder="Ex: 9.99" required step="0.01" min="0">
+
+            <label for="productImage">URL da Imagem:</label>
+            <input type="text" id="productImage" placeholder="https://exemplo.com/imagem.jpg" required>
+
+            <label for="productCategory">Categoria:</label>
             <select id="productCategory" required>
                 <option value="" disabled selected>Selecione a Categoria</option>
                 <option value="bebidas">Bebidas</option>
                 <option value="sanduiches">Sanduíches</option>
                 <option value="sobremesas">Sobremesas</option>
             </select>
-            <textarea id="productDescription" placeholder="Descrição do Produto" required></textarea>
+
+            <label for="productDescription">Descrição do Produto:</label>
+            <textarea id="productDescription" placeholder="Descrição do produto" required></textarea>
+
             <button type="submit">Adicionar Produto</button>
         </form>
-    </div>
+    </main>
 
-    <!-- Modal de Edição -->
     <div id="editModal" class="modal" style="display:none">
         <div class="modal-content">
             <h2>Editar Produto</h2>
             <form id="editProductForm">
                 <input type="hidden" id="editProductId">
 
-                <label>Nome:</label>
+                <label for="editProductName">Nome:</label>
                 <input type="text" id="editProductName" required>
 
-                <label>Preço:</label>
-                <input type="number" id="editProductPrice" required step="0.01">
+                <label for="editProductPrice">Preço:</label>
+                <input type="number" id="editProductPrice" required step="0.01" min="0">
 
-                <label>Imagem (URL):</label>
+                <label for="editProductImage">Imagem (URL):</label>
                 <input type="text" id="editProductImage" required>
 
-                <label>Categoria:</label>
+                <label for="editProductCategory">Categoria:</label>
                 <select id="editProductCategory" required>
                     <option value="bebidas">Bebidas</option>
                     <option value="sanduiches">Sanduíches</option>
                     <option value="sobremesas">Sobremesas</option>
                 </select>
 
-                <label>Descrição:</label>
+                <label for="editProductDescription">Descrição:</label>
                 <textarea id="editProductDescription" required></textarea>
 
                 <div class="modal-buttons">

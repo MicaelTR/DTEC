@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cardápio - Rei do Smash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="cardapio-p.css">
+</head>
+<body>
+    <header class="public-header">
+        <div class="logo-container">
+            <img src="smash.png" alt="Logo Rei do Smash">
+            <span class="logo-text">Cardápio Rei do Smash</span>
+        </div>
+        <nav class="public-nav">
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Cardápio</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div id="product-cards-container">
+            <div class="section-header">
+                <h2>Bebidas</h2>
+                <span class="material-icons cart-icon">shopping_cart</span>
+            </div>
+            <div class="cards-grid" data-categoria="bebidas"></div>
+
+            <h2>Sanduíches</h2>
+            <div class="cards-grid" data-categoria="sanduiches"></div>
+
+            <h2>Sobremesas</h2>
+            <div class="cards-grid" data-categoria="sobremesas"></div>
+        </div>
+    </main>
+
+    <!-- Modal de Seleção do Produto -->
+    <div id="orderModal" class="modal" style="display:none">
+        <div class="modal-content">
+            <h2 id="modalProductName">Selecionar Produto</h2>
+            <form id="orderForm">
+                <input type="hidden" id="orderProductId">
+
+                <!-- Seletor de tamanho -->
+                <label for="productSize">Tamanho:</label>
+                <select id="productSize" required>
+                    <option value="pequeno">Pequeno</option>
+                    <option value="medio">Médio</option>
+                    <option value="grande">Grande</option>
+                </select>
+
+                <!-- Controle de quantidade -->
+                <label>Quantidade:</label>
+                <div class="quantity-control">
+                    <button type="button" id="btnDecrease" class="btn-qty">-</button>
+                    <input type="number" id="productQuantity" value="1" min="1" readonly>
+                    <button type="button" id="btnIncrease" class="btn-qty">+</button>
+                </div>
+
+                <!-- Observações -->
+                <label for="productNote">Observações:</label>
+                <textarea id="productNote" placeholder="Ex: sem cebola, ponto da carne, etc..."></textarea>
+
+                <!-- Botões -->
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-send">Adicionar ao Carrinho</button>
+                    <button type="button" class="btn-cancel" id="btnCancelOrder">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="publico.js"></script>
+</body>
+</html>
