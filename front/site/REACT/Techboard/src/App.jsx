@@ -1,17 +1,29 @@
 
 import './App.css'
+import { FormularioDeEvento } from './assets/Componetes/CampoDeFormulario/CampoDeEntrada/FormularioDeEvento'
 
-function FormularioDeEvento () {
+function Label ({children, htmlFor}) {
   return (
-    <form className='form-evento'>
-      <h2>Criar Evento</h2>
-      <fieldset>
-        <label htmlFor="">Qual é o nome do evento?</label>
-        <input type="text" id="nome" placeholder='Nome do evento'/>
-      </fieldset>
-    </form>
+    <label htmlFor={htmlFor}>
+      {children}
+    </label>
   )
 }
+function CampoDeFormulario({children}) {
+  return (
+    <fieldset>
+      {children}
+    </fieldset>
+  )
+}
+
+function TituloFormulario(props) {
+  return (
+    <h2> {props.children} </h2>
+  )
+}
+
+
 
 function App() {
 

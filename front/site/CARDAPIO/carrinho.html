@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho - Rei do Smash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fonte de ícones do Google -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="cardapio-p.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body>
+  <header class="public-header">
+    <div class="logo-container">
+      <img src="smash.png" alt="Logo Rei do Smash">
+      <span class="logo-text">Rei do Smash</span>
+    </div>
+    <nav class="public-nav">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="cardapio.html">Cardápio</a></li>
+        <li><a href="#">Carrinho</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>🛒 Seu Carrinho</h1>
+
+    <div id="cart-items">
+      <!-- Produtos serão renderizados aqui via JS -->
+      <!-- Exemplo de produto renderizado -->
+      <div class="cart-item">
+        <img src="exemplo.jpg" alt="Produto" class="cart-item-image">
+
+        <div class="cart-item-info">
+          <h3>Smash Burger</h3>
+          <div class="quantity-control">
+            <button type="button" class="btn-qty">
+              <span class="material-icons">remove</span>
+            </button>
+            <input type="number" value="1" readonly>
+            <button type="button" class="btn-qty">
+              <span class="material-icons">add</span>
+            </button>
+          </div>
+
+          <div class="price-info">
+            <p class="total-price">R$ 25,00</p>
+            <p class="unit-price">R$ 25,00 unid.</p>
+          </div>
+        </div>
+
+        <button class="btn-remove">
+          <span class="material-icons">delete</span> Remover
+        </button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Total: R$ <span id="cart-total">0.00</span></h3>
+      <div class="cart-buttons">
+        <button onclick="window.location.href='cardapio-publico.html'" class="btn-cancel">Continuar Comprando</button>
+        <button class="btn-send">Finalizar Compra</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="carrinho.js"></script>
+</body>
+</html>
