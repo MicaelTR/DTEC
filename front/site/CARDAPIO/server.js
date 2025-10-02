@@ -9,7 +9,11 @@ const PORT = 3001;
 
 // Lista "Vazia" de produtos onde vão ser armazenados os produtos
 let produtos = [
-    
+    { "id": 32, "nome": "Hamburguer da Casa", "preco": "29.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "sanduiches", "descricao": "hamburguer completo" },
+    { "id": 1, "nome": "X-Burguer", "preco": "24.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "sanduiches", "descricao": "hamburguer simples" },
+    { "id": 2, "nome": "Coca-Cola", "preco": "7.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "bebidas", "descricao": "Refrigerante 350ml" },
+    { "id": 3, "nome": "Fritas", "preco": "12.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "acompanhamentos", "descricao": "Batata frita média" }
+
 ];
 
 
@@ -31,7 +35,6 @@ app.get("/produtos/:id", (req, res) => {
 // Adiciona um novo produto na lista "Vazia" de produtos.
 app.post("/produtos", (req, res) => {
     const { nome, preco, imagem, categoria, descricao } = req.body;
-
     const novoProduto = {
         id: Date.now(), // Cria um ID único sem repetir. Ele crie com base em milisegundos desde 1970.
         nome,
@@ -49,7 +52,7 @@ app.post("/produtos", (req, res) => {
 app.put("/produtos/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const produtoIndex = produtos.findIndex(p => p.id === id);
-    
+
     if (produtoIndex === -1) {
         return res.status(404).json({ mensagem: "Produto não encontrado" });
     }
@@ -80,6 +83,9 @@ app.delete("/produtos/:id", (req, res) => {
 
     res.json({ mensagem: "Produto excluído com sucesso" });
 });
+
+
+
 
 // Verifica se o servidor ta funcionando
 app.get("/", (req, res) => {
