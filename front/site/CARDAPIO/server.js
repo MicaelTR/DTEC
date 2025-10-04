@@ -9,10 +9,10 @@ const PORT = 3001;
 
 // Lista "Vazia" de produtos onde vão ser armazenados os produtos
 let produtos = [
-    { "id": 32, "nome": "Hamburguer da Casa", "preco": "29.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "sanduiches", "descricao": "hamburguer completo" },
-    { "id": 1, "nome": "X-Burguer", "preco": "24.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "sanduiches", "descricao": "hamburguer simples" },
-    { "id": 2, "nome": "Coca-Cola", "preco": "7.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "bebidas", "descricao": "Refrigerante 350ml" },
-    { "id": 3, "nome": "Fritas", "preco": "12.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "acompanhamentos", "descricao": "Batata frita média" }
+    { "id": 1, "nome": "Hamburguer da Casa", "preco": "29.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR464svueYsA-NERyuGDPyIr_CdFNCF7yJtww&s", "categoria": "sanduiches", "descricao": "hamburguer completo" },
+    { "id": 2, "nome": "Smash Turbo", "preco": "24.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0jUvXPb01DCcvzxWVEL3C5fJDx_Dac4j8RA&s", "categoria": "sanduiches", "descricao": "Smash da melhor qualidade" },
+    { "id": 3, "nome": "Coca-Cola", "preco": "7.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtJwliVQqgUxaRgGdhikZrq8u6M-Quz7LlFQ&s", "categoria": "bebidas", "descricao": "Refrigerante 350ml" },
+    { "id": 4, "nome": "Copo Da Felicidade", "preco": "12.99", "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKObVh4HlDznauAdGxvmobbCj2OSH9eIdyvw&s", "categoria": "sobremesas", "descricao": "Uma sobremesa recheada com uva ninho e uma grande quantidade de chocolate" }
 
 ];
 
