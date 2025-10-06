@@ -2,13 +2,7 @@
 import './App.css'
 import { FormularioDeEvento } from './assets/Componetes/CampoDeFormulario/CampoDeEntrada/FormularioDeEvento'
 
-function Label ({children, htmlFor}) {
-  return (
-    <label htmlFor={htmlFor}>
-      {children}
-    </label>
-  )
-}
+
 function CampoDeFormulario({children}) {
   return (
     <fieldset>
@@ -17,11 +11,7 @@ function CampoDeFormulario({children}) {
   )
 }
 
-function TituloFormulario(props) {
-  return (
-    <h2> {props.children} </h2>
-  )
-}
+
 
 
 
