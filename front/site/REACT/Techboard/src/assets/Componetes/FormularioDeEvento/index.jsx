@@ -1,8 +1,8 @@
-import '../FormularioDeEvento/FormularioDeEvento.css'
-import { CampoDeEntarda } from '../../CampoDeEntrada'
-import { CampoDeFormulario } from '../../../CampoDeFormulario'
-import { Label } from '../../../Label'
-import { TituloFormulario } from '../../../TituloFormulario'
+import './FormularioDeEvento.css'
+import { CampoDeEntarda } from '../CampoDeEntrada'
+import { CampoDeFormulario } from '../CampoDeFormulario'
+import { Label } from '../Label'
+import { TituloFormulario } from '../TituloDeFormulario'
 
 export function FormularioDeEvento () {
     return (

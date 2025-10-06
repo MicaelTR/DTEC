@@ -1,18 +1,6 @@
 
 import './App.css'
-import { FormularioDeEvento } from './assets/Componetes/CampoDeFormulario/CampoDeEntrada/FormularioDeEvento'
-
-
-function CampoDeFormulario({children}) {
-  return (
-    <fieldset>
-      {children}
-    </fieldset>
-  )
-}
-
-
-
+import { FormularioDeEvento } from './assets/Componetes/FormularioDeEvento'
 
 
 function App() {
