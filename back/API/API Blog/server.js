@@ -1,100 +1,98 @@
+// Carregar variáveis de ambiente do arquivo .env
+require("dotenv").config();
+
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
-const app = express();
+const cors = require("cors");
 
+// Importar mongoose do mongo DB
+const mongoose = require("mongoose");
+
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI)
+    .then(() => console.log("Conectado ao MongoDB"))
+    .catch(err => console.error("Erro ao conectar ao MongoDB:", err));
+
+const app = express();
 app.use(express.json());
+app.use(cors());
 
 const PORT = 3000;
 
-let posts = [];
+// “Banco de dados” em memória com alguns usuários iniciais
+let usuarios = [
+    { id: uuidv4(), nome: "Micael", idade: 16 },
+    { id: uuidv4(), nome: "Lucas", idade: 21 },
+    { id: uuidv4(), nome: "Amanda", idade: 19 },
+    { id: uuidv4(), nome: "Beatriz", idade: 25 }
+];
 
-
-app.get("/posts", (req, res) => {
-    res.json(posts);
+// Rota padrão
+app.get("/", (req, res) => {
+    res.send("🚀 API de Usuários está rodando!");
 });
 
-app.get("/posts/:id", (req, res) => {
-    const post = posts.find(p => p.id === req.params.id);
-
-    if (!post) {
-        return res.status(404).json({ mensagem: "Post não encontrado" });
-    }
-
-    res.json(post);
+// === Listar todos os usuários ===
+app.get("/usuarios", (req, res) => {
+    res.json(usuarios);
 });
 
-app.post("/posts", (req, res) => {
-    const { autor, titulo, conteudo } = req.body;
+// === Buscar um usuário específico ===
+app.get("/usuarios/:id", (req, res) => {
+    const user = usuarios.find(u => u.id === req.params.id);
+    if (!user) {
+        return res.status(404).json({ mensagem: "Usuário não encontrado" });
+    }
+    res.json(user);
+});
 
-    if (!autor || !titulo || !conteudo) {
-        return res.status(400).json({ mensagem: "Autor, titulo e conteudo são obrigatórios" });
+// === Adicionar novo usuário ===
+app.post("/usuarios", (req, res) => {
+    const { nome, idade } = req.body;
+
+    if (!nome || !idade) {
+        return res.status(400).json({ mensagem: "Nome e idade são obrigatórios" });
     }
 
-    const novoPost = {
+    const novoUsuario = {
         id: uuidv4(),
-        autor,
-        titulo,
-        conteudo,
-        dataCriacao: new Date().toISOString(),
-        comentarios: []
+        nome,
+        idade: parseInt(idade)
     };
 
-    posts.push(novoPost);
-    res.status(201).json(novoPost);
+    usuarios.push(novoUsuario);
+    res.status(201).json(novoUsuario);
 });
 
-app.put("/posts/:id", (req, res) => {
+// === Editar usuário existente ===
+app.put("/usuarios/:id", (req, res) => {
     const { id } = req.params;
-    const { autor, titulo, conteudo } = req.body;
+    const { nome, idade } = req.body;
 
-    const post = posts.find(p => p.id === id);
-
-    if (!post) {
-        return res.status(404).json({ mensagem: "Post não encontrado" });
+    const user = usuarios.find(u => u.id === id);
+    if (!user) {
+        return res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
 
-    if (autor !== undefined) post.autor = autor;
-    if (titulo !== undefined) post.titulo = titulo;
-    if (conteudo !== undefined) post.conteudo = conteudo;
+    if (nome !== undefined) user.nome = nome;
+    if (idade !== undefined) user.idade = parseInt(idade);
 
-    res.json(post);
+    res.json(user);
 });
 
-app.delete("/posts/:id", (req, res) => {
-    const { id } = req.params;
-    const index = posts.findIndex(p => p.id === id);
-
+// === Deletar usuário ===
+app.delete("/usuarios/:id", (req, res) => {
+    const index = usuarios.findIndex(u => u.id === req.params.id);
     if (index === -1) {
-        return res.status(404).json({ mensagem: "Post não encontrado" });
+        return res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
 
-    posts.splice(index, 1);
+    usuarios.splice(index, 1);
     res.status(204).send();
 });
 
-app.post("/posts/:id/comentarios", (req, res) => {
-    const { id } = req.params;
-    const { comentario } = req.body;
-
-    if (!comentario) {
-        return res.status(400).json({ mensagem: "Campo 'comentario' é obrigatório" });
-    }
-
-    const post = posts.find(p => p.id === id);
-
-    if (!post) {
-        return res.status(404).json({ mensagem: "Post não encontrado" });
-    }
-
-    post.comentarios.push(comentario);
-    res.status(201).json({ mensagem: "Comentário adicionado com sucesso" });
-});
-
+// Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-    
-});
-
-app.get("/", (req, res) => {
-    res.send("Bem-vindo à API do Blog!");
+    console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
 });

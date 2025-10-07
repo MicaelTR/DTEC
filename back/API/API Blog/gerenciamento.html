@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-Br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,27 +9,15 @@
 <body>
     <div class="container">
         <h1>Gerenciamento de Usuários</h1>
-        <p>Clique em "Listar Usuários" para carregar os dados</p>
+        <p style="text-align:center;">Clique em "Listar Usuários" para carregar os dados</p>
 
         <div class="header-buttons">
             <button id="btnListUsers">Listar Usuários</button>
         </div>
 
-        <div id="user-cards-container" class="cards-grid">
-            <div class="user-card">
-                <div class="user-info">
-                    <p><strong>Id:</strong>1</p>
-                    <p><strong>Nome:</strong>Micael</p>
-                    <p><strong>Idade:</strong>16</p>
-                </div>
+        <!-- Container onde os usuários serão renderizados pelo JS -->
+        <div id="user-cards-container" class="cards-grid"></div>
 
-                <div class="card-btns">
-                    <button class="btn-edit">Editar</button>
-                    <button class="btn-delete">Excluir</button>
-                </div>
-            </div>
-        </div>
-        
         <h2>Adicionar Novo Usuário</h2>
         <form id="addUserForm" class="add-user-form">
             <input type="text" id="addName" placeholder="Nome do Usuário" required>
@@ -38,6 +26,7 @@
         </form>
     </div>
 
+    <!-- Modal de Edição -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>Editar Usuário</h2>
@@ -49,13 +38,13 @@
                 <input type="number" id="editAge" required>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-save">Salvar</button>
-                    <button type="button"class="btn-cancel" id="btnCancelEdit">Cancelar</button>
+                    <button type="button" class="btn-cancel" id="btnCancelEdit">Cancelar</button>
                 </div>
             </form>
         </div>
     </div>
-</body>
 
+    <!-- JS -->
     <script src="gerenciamento.js"></script>
-    
+</body>
 </html>
