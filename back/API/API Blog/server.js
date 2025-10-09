@@ -2,32 +2,26 @@
 require("dotenv").config();
 
 const express = require("express");
-const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
-
-// Importar mongoose do mongo DB
 const mongoose = require("mongoose");
-
-const mongoURI = process.env.MONGO_URI;
-
-mongoose.connect(mongoURI)
-    .then(() => console.log("Conectado ao MongoDB"))
-    .catch(err => console.error("Erro ao conectar ao MongoDB:", err));
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
+// Conectar ao MongoDB
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI)
+    .then(() => console.log("✅ Conectado ao MongoDB"))
+    .catch(err => console.error("❌ Erro ao conectar ao MongoDB:", err));
 
+// Esquema do usuário
 const userSchema = new mongoose.Schema({
-    nome: {type: String, required: true},
-    idade: {type: Number, required: true}
+    nome: { type: String, required: true },
+    idade: { type: Number, required: true }
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);
-
-// “Banco de dados” em memória com alguns usuários iniciais
 
 // Rota padrão
 app.get("/", (req, res) => {
@@ -39,123 +33,114 @@ app.get("/usuarios", async (req, res) => {
     try {
         const usuarios = await User.find({});
         res.json(usuarios);
-    }
-    catch (err) {
-        res.status(500).json({ mensagem: "Erro ao buscar usuários", err: err.message });
+    } catch (err) {
+        res.status(500).json({ mensagem: "Erro ao buscar usuários", erro: err.message });
     }
 });
 
-// === Buscar um usuário específico ===
-
-// Buscar por ID
+// === Buscar um usuário por ID ===
 app.get("/usuarios/:id", async (req, res) => {
     try {
-        const id = req.params.id;
-        const user = await User.findById(id);
-
+        const user = await User.findById(req.params.id);
         if (user) {
             res.json(user);
-        }
-
-        else {
+        } else {
             res.status(404).json({ mensagem: "Usuário não encontrado" });
         }
-    }
-
-    catch (err) {
-        res.status(400).json({ mensagem: "Erro ao buscar usuário", err: err.message });
+    } catch (err) {
+        res.status(400).json({ mensagem: "ID inválido ou erro ao buscar usuário", erro: err.message });
     }
 });
 
-// Buscar por nome
+// === Buscar usuários por nome (parcial, case-insensitive) ===
 app.get("/usuarios/nome/:nome", async (req, res) => {
     try {
-        const proucrarNome = req.params.idade;
+        const procurarNome = req.params.nome;
         const resultado = await User.find({
-            nome: { $regex: proucrarNome, $options: "i" }
+            nome: { $regex: procurarNome, $options: "i" }
         });
-        
+
         if (resultado.length > 0) {
             res.json(resultado);
-        }
-
-        else {
+        } else {
             res.status(404).json({ mensagem: "Usuário não encontrado" });
-        }[]
-         
-          ,g
-    }
-
-    catch (err) {
+        }
+    } catch (err) {
+        res.status(400).json({ mensagem: "Erro ao buscar por nome", erro: err.message });
     }
 });
 
-// Buscar por idade
+// === Buscar usuários por idade ===
 app.get("/usuarios/idade/:idade", async (req, res) => {
     try {
-        const nome = req.params.idade;
-        const user = await User.find(idade);
+        const idade = parseInt(req.params.idade);
+        const resultado = await User.find({ idade });
 
-        if (user) {
-            res.json(user);
+        if (resultado.length > 0) {
+            res.json(resultado);
+        } else {
+            res.status(404).json({ mensagem: "Nenhum usuário encontrado com essa idade" });
         }
-
-        else {
-            res.status(404).json({ mensagem: "Usuário não encontrado" });
-        }
-    }
-
-    catch (err) {
-        res.status(400).json({ mensagem: "Erro ao buscar usuário", err: err.message });
+    } catch (err) {
+        res.status(400).json({ mensagem: "Erro ao buscar por idade", erro: err.message });
     }
 });
 
-// === Adicionar novo usuário ===
-app.post("/usuarios", (req, res) => {
+// === Criar novo usuário ===
+app.post("/usuarios", async (req, res) => {
     const { nome, idade } = req.body;
 
     if (!nome || !idade) {
         return res.status(400).json({ mensagem: "Nome e idade são obrigatórios" });
     }
 
-    const novoUsuario = {
-        id: uuidv4(),
-        nome,
-        idade: parseInt(idade)
-    };
-
-    usuarios.push(novoUsuario);
-    res.status(201).json(novoUsuario);
+    try {
+        const novoUsuario = new User({ nome, idade });
+        const salvo = await novoUsuario.save();
+        res.status(201).json(salvo);
+    } catch (err) {
+        res.status(500).json({ mensagem: "Erro ao criar usuário", erro: err.message });
+    }
 });
 
-// === Editar usuário existente ===
-app.put("/usuarios/:id", (req, res) => {
-    const { id } = req.params;
+// === Atualizar usuário por ID ===
+app.put("/usuarios/:id", async (req, res) => {
     const { nome, idade } = req.body;
 
-    const user = usuarios.find(u => u.id === id);
-    if (!user) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado" });
+    try {
+        const atualizado = await User.findByIdAndUpdate(
+            req.params.id,
+            { nome, idade },
+            { new: true, runValidators: true }
+        );
+
+        if (atualizado) {
+            res.json(atualizado);
+        } else {
+            res.status(404).json({ mensagem: "Usuário não encontrado" });
+        }
+    } catch (err) {
+        res.status(400).json({ mensagem: "Erro ao atualizar usuário", erro: err.message });
     }
-
-    if (nome !== undefined) user.nome = nome;
-    if (idade !== undefined) user.idade = parseInt(idade);
-
-    res.json(user);
 });
 
-// === Deletar usuário ===
-app.delete("/usuarios/:id", (req, res) => {
-    const index = usuarios.findIndex(u => u.id === req.params.id);
-    if (index === -1) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado" });
-    }
+// === Deletar usuário por ID ===
+app.delete("/usuarios/:id", async (req, res) => {
+    try {
+        const deletado = await User.findByIdAndDelete(req.params.id);
 
-    usuarios.splice(index, 1);
-    res.status(204).send();
+        if (deletado) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({ mensagem: "Usuário não encontrado" });
+        }
+    } catch (err) {
+        res.status(400).json({ mensagem: "Erro ao deletar usuário", erro: err.message });
+    }
 });
 
 // Iniciar servidor
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
 });
