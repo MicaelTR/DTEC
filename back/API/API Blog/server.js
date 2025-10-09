@@ -18,15 +18,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+const userSchema = new mongoose.Schema({
+    nome: {type: String, required: true},
+    idade: {type: Number, required: true}
+}, { timestamps: true });
+
+const User = mongoose.model("User", userSchema);
 
 // “Banco de dados” em memória com alguns usuários iniciais
-let usuarios = [
-    { id: uuidv4(), nome: "Micael", idade: 16 },
-    { id: uuidv4(), nome: "Lucas", idade: 21 },
-    { id: uuidv4(), nome: "Amanda", idade: 19 },
-    { id: uuidv4(), nome: "Beatriz", idade: 25 }
-];
 
 // Rota padrão
 app.get("/", (req, res) => {
@@ -34,17 +35,77 @@ app.get("/", (req, res) => {
 });
 
 // === Listar todos os usuários ===
-app.get("/usuarios", (req, res) => {
-    res.json(usuarios);
+app.get("/usuarios", async (req, res) => {
+    try {
+        const usuarios = await User.find({});
+        res.json(usuarios);
+    }
+    catch (err) {
+        res.status(500).json({ mensagem: "Erro ao buscar usuários", err: err.message });
+    }
 });
 
 // === Buscar um usuário específico ===
-app.get("/usuarios/:id", (req, res) => {
-    const user = usuarios.find(u => u.id === req.params.id);
-    if (!user) {
-        return res.status(404).json({ mensagem: "Usuário não encontrado" });
+
+// Buscar por ID
+app.get("/usuarios/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findById(id);
+
+        if (user) {
+            res.json(user);
+        }
+
+        else {
+            res.status(404).json({ mensagem: "Usuário não encontrado" });
+        }
     }
-    res.json(user);
+
+    catch (err) {
+        res.status(400).json({ mensagem: "Erro ao buscar usuário", err: err.message });
+    }
+});
+
+// Buscar por nome
+app.get("/usuarios/nome/:nome", async (req, res) => {
+    try {
+        const proucrarNome = req.params.idade;
+        const resultado = await User.find({
+            nome: { $regex: proucrarNome, $options: "i" }
+        });
+        
+        if (resultado.length > 0) {
+            res.json(resultado);
+        }
+
+        else {
+            res.status(404).json({ mensagem: "Usuário não encontrado" });
+        } 
+    }
+
+    catch (err) {
+    }
+});
+
+// Buscar por idade
+app.get("/usuarios/idade/:idade", async (req, res) => {
+    try {
+        const nome = req.params.idade;
+        const user = await User.find(idade);
+
+        if (user) {
+            res.json(user);
+        }
+
+        else {
+            res.status(404).json({ mensagem: "Usuário não encontrado" });
+        }
+    }
+
+    catch (err) {
+        res.status(400).json({ mensagem: "Erro ao buscar usuário", err: err.message });
+    }
 });
 
 // === Adicionar novo usuário ===
