@@ -81,7 +81,9 @@ app.get("/usuarios/nome/:nome", async (req, res) => {
 
         else {
             res.status(404).json({ mensagem: "Usuário não encontrado" });
-        } 
+        }[]
+         
+          ,g
     }
 
     catch (err) {
