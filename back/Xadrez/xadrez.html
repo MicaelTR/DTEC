@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♟️ Jogo de Xadrez (com cheque/xeque-mate)</title>
+    <link rel="stylesheet" href="xadrez.css">
+</head>
+
+<body>
+
+    <!-- 🧭 MENU INICIAL -->
+    <div id="menu" class="menu">
+        <h2>Modo de Jogo</h2>
+        <button onclick="startGame('2p')">👥 2 Jogadores</button>
+        <button onclick="showBotOptions()">🤖 Contra o Bot</button>
+
+        <div id="bot-options" class="hidden">
+            <h3>Dificuldade do Bot</h3>
+            <button onclick="startGame('bot', 'easy')">😄 Fácil</button>
+            <button onclick="startGame('bot', 'medium')">🧠 Médio</button>
+            <button onclick="startGame('bot', 'hard')">🔥 Difícil</button>
+        </div>
+    </div>
+
+    <!-- 🎯 CONTAINER PRINCIPAL DO JOGO -->
+    <div id="gameContainer" style="display: none;">
+        <div id="board"></div>
+
+        <div id="sidePanel">
+            <div id="turnIndicator">Vez: Brancas</div>
+            <div id="estado">Jogando</div>
+            <button id="reset">🔄 Reiniciar</button>
+
+            <div class="captured-box">
+                <div class="captured-title">Pretas capturadas</div>
+                <div id="capturedBlack" class="captured"></div>
+            </div>
+
+            <div class="captured-box">
+                <div class="captured-title">Brancas capturadas</div>
+                <div id="capturedWhite" class="captured"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-ups -->
+    <div id="promotionMenu">
+        <div class="box">
+            <div>Escolha a peça para promoção:</div>
+            <div class="options" id="promotionOptions"></div>
+        </div>
+    </div>
+
+    <div id="endMessage">
+        <div class="box" id="endText"></div>
+    </div>
+
+    <script src="xadrez.js"></script>
+</body>
+
+</html>
