@@ -5,16 +5,28 @@ import { FormularioDeEvento } from './assets/Componetes/FormularioDeEvento'
 
 function App() {
 
+  const temas = [
+
+  ]
+
+  const eventos = [
+
+  ]
+
+  function adicionarEvento(evento) {
+    eventos.push(evento)
+    console.log("eventos =>" , eventos)
+  }
+
   return (
     <main>
       <header>
         <img src="/logo.png" alt="Logo" />
       </header>
 
-      <section>
-        <img src="/banner.png" alt="Banner Prinicipal"/>
-      </section>
-      <FormularioDeEvento> </FormularioDeEvento>
+      <Banner/>
+
+      <FormularioDeEvento temas={temas} aoSubmeter={adicionarEvento}> </FormularioDeEvento>
     </main>
   )
 }
