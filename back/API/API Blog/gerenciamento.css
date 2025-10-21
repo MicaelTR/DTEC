@@ -87,13 +87,14 @@ h1, h2 {
     gap: 10px;
 }
 
-.card-btns button {
+.card-buttons button {
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     color: white;
     transition: background-color 0.3s;
+
 }
 
 .btn-edit {

@@ -13,6 +13,11 @@
 
         <div class="header-buttons">
             <button id="btnListUsers">Listar Usuários</button>
+
+            <button id="btn-cadasto" class="btn-action">Cadastre-se</button>
+            <button id="btn-login" class="btn-action">Login</button>
+
+            <p id="adimStatus" class="auth-status"></p>
         </div>
 
         <!-- Container onde os usuários serão renderizados pelo JS -->
@@ -40,6 +45,45 @@
                     <button type="submit" class="btn-save">Salvar</button>
                     <button type="button" class="btn-cancel" id="btnCancelEdit">Cancelar</button>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form id="adminLoginForm">
+                <label for="adminUsername">Nome do Usuário:</label>
+                <input type="text" id="adminUsername" required placeholder="Digite o nome de usuário">
+
+                <label for="adminPassword">Senha:</label>
+                <input type="password" id="adminPassword" required placeholder="Digite a senha">
+
+                <div class="modal-buttons">
+                    <button class="btn-save">Entrar</button>
+                    <button id="btnCancelLogin" class="btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h2>Criar Conta</h2>
+            <form id="adminRegisterForm">
+                <p id="adminRegisterStatus" class="auth-status"></p>
+
+                <label for="registerUsername">Nome do Usuário:</label>
+                <input type="text" id="registerUsername" required placeholder="Digite o nome de usuário">
+
+                <label for="registerPassword">Senha:</label>
+                <input type="password" id="registerPassword" required placeholder="Crie uma senha">
+
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-save">Criar</button>
+                    <button type="button" class="btn-cancel" id="btnCancelRegister">Cancelar</button>
+                </div>
+
             </form>
         </div>
     </div>

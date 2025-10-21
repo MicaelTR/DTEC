@@ -1,143 +1,152 @@
-const API_URL = "http://localhost:3000/usuarios";
+const API_URL = `http://localhost:3001/usuarios`;
 
-// Containers e formulários
-const userCardsContainer = document.getElementById("user-cards-container");
-const listarUser = document.getElementById("btnListUsers");
+//Seleção de Elementos do HTML INICIAL
+const userCardsContainer = document.getElementById('user-cards-container');
+const addUserForm = document.getElementById('addUserForm');
+const btnListUsers = document.getElementById('btnListUsers');
 
-const userForm = document.getElementById("addUserForm");
-const name = document.getElementById("addName");
-const idade = document.getElementById("addAge");
+//Seleção de elementos do MODAL
+const editModal = document.getElementById('editModal');
+const editUserForm = document.getElementById('editUserForm');
+const btnCancelEdit = document.getElementById('btnCancelEdit');
+const editIdInput = document.getElementById('editId');
+const editNameInput = document.getElementById('editName')
+const editAgeInput = document.getElementById('editAge')
 
-const EditarUser = document.getElementById("editUserForm");
-const editarModal = document.getElementById("editModal");
-const editIdinp = document.getElementById("editId");
-const editrName = document.getElementById("editName");
-const editAge = document.getElementById("editAge");
-const btnCancelar = document.getElementById("btnCancelEdit");
 
-// ====================== FUNÇÕES ======================
-
-// Buscar e renderizar usuários
+//CRIAÇÃO DE FUNÇÕES
 function fetchAndRenderUsers() {
+    //Faz uma requisição GET para a URL
     fetch(API_URL)
         .then(response => response.json())
+        //renderUsers() função que vai organizar as informações na tela
         .then(users => renderUsers(users))
         .catch(error => {
-            console.error("Erro ao buscar usuários:", error);
-            userCardsContainer.innerHTML = "<p><strong>Erro ao carregar usuários!</strong></p>";
-        });
+            console.error("Erro ao buscar usuários", error);
+            userCardsContainer.innerHTML = `<p>Erro ao carregar usuários</p>`
+        })              
 }
 
-// Adicionar usuário
-function addUser(userData) {
+//Função para adicionar um novo usuário
+function addUser(userData){
     fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(userData)
     })
     .then(response => response.json())
     .then(() => {
-        userForm.reset();
+        addUserForm.reset();
         fetchAndRenderUsers();
     })
-    .catch(error => console.error("Erro ao adicionar usuário:", error));
+    .catch(error => console.error("Erro ao adicionar usuário", error)) ;   
 }
 
-// Editar usuário
-function editUser(userId, userData) {
+//FUNÇÃO PARA EDITAR USUÁRIO EXISTENTE
+function editUser(userId, userData){
     fetch(`${API_URL}/${userId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(userData)
     })
     .then(response => response.json())
     .then(() => {
-        editarModal.style.display = "none";
+        editModal.style.display = 'none';
         fetchAndRenderUsers();
     })
-    .catch(error => console.error("Erro ao editar usuário:", error));
+    .catch(error => console.error("Erro ao editar o usuário", error));
 }
 
-// Deletar usuário
 function deleteUser(userId) {
-    fetch(`${API_URL}/${userId}`, { method: "DELETE" })
-        .then(() => fetchAndRenderUsers())
-        .catch(error => console.error("Erro ao deletar usuário:", error));
+    fetch(`${API_URL}/${userId}`, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(() => {
+        fetchAndRenderUsers()
+    })
+    .catch(error => console.error('Erro ao excluir usuário', error))
 }
 
-// Renderizar usuários na tela
 function renderUsers(users) {
     userCardsContainer.innerHTML = "";
 
-    if (users.length === 0) {
-        userCardsContainer.innerHTML = "<p><strong>Nenhum usuário cadastrado!</strong></p>";
+    if(users.length === 0) {
+        userCardsContainer.innerHTML = `<p>Nenhum usuário cadastrado</p>`
         return;
     }
 
     users.forEach(user => {
-        const userCard = document.createElement("div");
-        userCard.className = "user-card";
+        const userCard = document.createElement('div');
+        userCard.className = 'user-card';
 
         userCard.innerHTML = `
             <div class="user-info">
-                <p><strong>ID:</strong> ${user.id}</p>
-                <p><strong>Nome:</strong> ${user.nome}</p>
-                <p><strong>Idade:</strong> ${user.idade}</p>
+                <p><strong>ID:</strong>${user._id.slice(0,5)}</p>
+                <p><strong>Nome:</strong>${user.nome}</p>
+                <p><strong>Idade:</strong>${user.idade}</p>
             </div>
-            <div class="card-btns">
+            <div class="card-buttons">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Deletar</button>
+                <button class="btn-delete">Excluir</button>
             </div>
         `;
 
+        const editBtn = userCard.querySelector('.btn-edit');
+        const deleteBtn = userCard.querySelector('.btn-delete');
+
+        editBtn.addEventListener('click', () => {
+            editIdInput.value = user._id;
+            editNameInput.value = user.nome;
+            editAgeInput.value = user.idade;
+            editModal.style.display = 'flex';
+        })
+
+        deleteBtn.addEventListener('click', () => {
+            if(confirm(`Tem certeza que deseja excluir o usuário ${user._id.slice(0,5)}`)){
+                deleteUser(user._id)
+            }
+        })
         userCardsContainer.appendChild(userCard);
 
-        // Botão Editar
-        const btnEdit = userCard.querySelector(".btn-edit");
-        btnEdit.addEventListener("click", () => {
-            editarModal.style.display = "flex";
-            editIdinp.value = user.id;
-            editrName.value = user.nome;
-            editAge.value = user.idade;
-        });
+    })
 
-        // Botão Deletar
-        const btnDelete = userCard.querySelector(".btn-delete");
-        btnDelete.addEventListener("click", () => {
-            if (confirm(`Tem certeza que deseja deletar o usuário ${user.nome}?`)) {
-                deleteUser(user.id);
-            }
-        });
-    });
 }
 
-// ====================== EVENT LISTENERS ======================
+//Função botão Listar  Usuários
+btnListUsers.addEventListener('click', fetchAndRenderUsers);
 
-// Listar usuários
-listarUser.addEventListener("click", fetchAndRenderUsers);
+addUserForm.addEventListener('submit', (e) => {
+    e.preventDefault();//Impede que o submit recarregue a página
 
-// Adicionar usuário
-userForm.addEventListener("submit", (e) => {
+    const newUserName = document.getElementById('addName').value
+    const newUserAge = parseInt(document.getElementById('addAge').value);
+
+    addUser({nome: newUserName, idade: newUserAge})
+})
+
+editUserForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const novoUsuario = {
-        nome: name.value,
-        idade: parseInt(idade.value)
-    };
-    addUser(novoUsuario);
-});
 
-// Editar usuário
-EditarUser.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const userId = editIdinp.value;
-    const updatedUser = {
-        nome: editrName.value,
-        idade: parseInt(editAge.value)
-    };
-    editUser(userId, updatedUser);
-});
+    const userId = editIdInput.value;
+    const newName = editNameInput.value;
+    const newAge = editAgeInput.value;
 
-// Cancelar edição
-btnCancelar.addEventListener("click", () => {
-    editarModal.style.display = "none";
-});
+    editUser(userId, {nome: newName, idade: newAge});
+})
+
+btnCancelEdit.addEventListener('click', () => {
+    editModal.style.display = 'none'
+})
+
+window.addEventListener('click', (e) => {
+    if(e.target === editModal) {
+        editModal.style.display = 'none'
+    }
+})
+
+fetchAndRenderUsers();
