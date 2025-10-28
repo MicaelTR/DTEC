@@ -1,4 +1,4 @@
-//CARREGAR VARIÁVEIS DE AMBIENTE
+   //CARREGAR VARIÁVEIS DE AMBIENTE
 require('dotenv').config()
 
 //Importando o express
@@ -6,8 +6,21 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+//Importando o modelo de Usuário
+const Pessoa = require('./models/Pessoa');
+
+// Importando o modelo de Usuário
+const User = require('./models/User');
+
+// Importando bcrypt para hash de senhas
+const bcrypt = require('bcryptjs');
+
+// Importando jsonwebtoken para autenticação
+const jwt = require('jsonwebtoken');
+
 const PORT = process.env.PORT || 3000;
 const mongoURI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //CONEXÃO MONGODB
 mongoose.connect(mongoURI)
@@ -17,16 +30,26 @@ mongoose.connect(mongoURI)
     process.exit(1);
   })
 
-//estrutura do documento SCHEMA 
-const usuarioSchema = new mongoose.Schema(
-  {
-    nome: {type: String, required: true},
-    idade: {type: Number, required: true}
-  }, {timestamps: true}
-);
+// Função para gerar token JWT
+const generateToken = (id) => {
+  return jwt.sign({id}, JWT_SECRET, {expiresIn: "1d"})
+}
 
-//Modelo e Collection
-const Usuario = mongoose.model('Usuario', usuarioSchema)
+const protect = (req, res, next) => {
+  let token;
+
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+      jwt.verify(token, JWT_SECRET);
+      next()
+    }
+
+    catch (error) {
+      res.status(401).json({mensagem: "Não autorizado, token inválido"})
+    }
+  }
+}
 
 
 //Criando minha aplicação
@@ -47,7 +70,7 @@ app.get('/',(req,res) => {
 
 app.get('/usuarios',async (req,res) => {
     try {
-      const usuarios = await Usuario.find({});
+      const usuarios = await Pessoa.find({});
       res.json(usuarios);
     } catch (error) {
       res.status(500).json({mensagem: "Erro ao buscar usuários",erro: error.message})
@@ -57,7 +80,7 @@ app.get('/usuarios',async (req,res) => {
 app.get('/usuarios/:id', async (req, res) => {
     try {
       const id = req.params.id;
-      const usuario = await Usuario.findById(id);
+      const usuario = await Pessoa.findById(id);
 
       if(usuario){
         res.json(usuario)
@@ -72,7 +95,7 @@ app.get('/usuarios/:id', async (req, res) => {
 app.get('/usuarios/nome/:nome', async (req,res) => {
   try{
     const buscaNome = req.params.nome;
-    const resultados = await Usuario.find({
+    const resultados = await Pessoa.find({
       nome: {$regex: buscaNome, $options: 'i'}
     });
     if (resultados.length > 0) {
@@ -90,7 +113,7 @@ app.get('/usuarios/nome/:nome', async (req,res) => {
 app.get('/usuarios/idade/:idade', async (req,res) => {
   try{
     const buscaIdade = req.params.idade;
-    const resultados = await Usuario.find({
+    const resultados = await Pessoa.find({
       idade: buscaIdade
     });
     if (resultados.length > 0) {
@@ -107,7 +130,7 @@ app.get('/usuarios/idade/:idade', async (req,res) => {
 app.delete('/usuarios/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const usuarioDeletado = await Usuario.findByIdAndDelete(id);
+    const usuarioDeletado = await Pessoa.findByIdAndDelete(id);
 
     if(!usuarioDeletado) {
       return res.status(404).json({mensagem: "Usuário Não Encontrado"})
@@ -121,7 +144,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 // A sua rota POST para criar um novo usuário
 app.post('/usuarios', async (req, res) => {
     try {
-      const novoUsuario = await Usuario.create({
+      const novoUsuario = await Pessoa.create({
         nome: req.body.nome,
         idade: req.body.idade
       });
@@ -136,7 +159,7 @@ app.put('/usuarios/:id', async (req,res) => {
     const id = req.params.id
     const nome = req.body.nome
     const idade = req.body.idade
-    const usuarioAtualizado = await Usuario.findByIdAndUpdate(
+    const usuarioAtualizado = await Pessoa.findByIdAndUpdate(
       id,
       {nome, idade},
       {new: true, runValidators: true}

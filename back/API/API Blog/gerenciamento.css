@@ -191,7 +191,7 @@ h1, h2 {
     background-color: #5a6268;
 }
 
-#btnListUsers {
+#btnListUsers, #btn-cadastro , #btn-login {
     background-color: #28a745;
     color: white;
     padding: 10px 20px;
@@ -201,6 +201,6 @@ h1, h2 {
     transition: background-color 0.3s;
 }
 
-#btnListUsers:hover {
+#btnListUsers:hover, #btn-cadastro:hover , #btn-login:hover {
     background-color: #218838;
 }
