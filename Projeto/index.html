@@ -2,314 +2,452 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comércios da Minha Região</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conecta Vizinhos</title>
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <style>
-        /* ===== ESTILOS GERAIS ===== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Poppins", Arial, sans-serif;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", Arial, sans-serif;
+    }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background: #f4f7fb;
-            color: #2c3e50;
-        }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f4f7fb;
+      color: #2c3e50;
+    }
 
-        /* ===== HEADER ===== */
-        header {
-            background: #fff;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .logo img {
-            height: 40px;
-            width: 40px;
-        }
+    .logo img {
+      height: 45px;
+      width: auto;
+    }
 
-        .logo h1 {
-            font-size: 1.4rem;
-            color: #1e88e5;
-            font-weight: 600;
-        }
+    .logo h1 {
+      font-size: 1.5rem;
+      color: #1e88e5;
+      font-weight: 600;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
 
-        nav a {
-            text-decoration: none;
-            color: #2c3e50;
-            font-weight: 500;
-            transition: color 0.3s;
-            display: block;
-        }
+    nav a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s;
+      display: block;
+    }
 
-        nav a:hover {
-            color: #1e88e5;
-        }
+    nav a:hover {
+      color: #1e88e5;
+    }
 
-        /* ===== BOTÃO HAMBURGUER ===== */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-            cursor: pointer;
-        }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+    }
 
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: #1e88e5;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            transform-origin: center;
-        }
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #1e88e5;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
 
-        @media (max-width:768px) {
-            nav {
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                align-items: flex-start;
-                overflow: hidden;
-                max-height: 0;
-                transition: max-height 0.4s ease;
-                padding-left: 1.5rem;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            }
+    @media (max-width:768px) {
+      nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease;
+        padding-left: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
 
-            nav.open {
-                max-height: 250px;
-            }
+      nav.open {
+        max-height: 250px;
+      }
 
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
-                padding: 1rem 0;
-            }
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        padding: 1rem 0;
+      }
 
-            nav li {
-                width: 100%;
-            }
+      nav a {
+        font-size: 1.1rem;
+      }
 
-            nav a {
-                padding: 0.5rem 0;
-                font-size: 1.1rem;
-            }
+      .menu-toggle {
+        display: flex;
+      }
 
-            .menu-toggle {
-                display: flex;
-            }
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
 
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
 
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -8px);
+      }
+    }
 
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -8px);
-            }
-        }
+    #map {
+      height: 300px;
+      width: 100%;
+      margin-top: 70px;
+    }
 
-        /* ===== MAPA ===== */
-        #map {
-            height: 300px;
-            width: 100%;
-            margin-top: 70px;
-        }
+    .controls {
+      padding: 12px 20px;
+      max-width: 1100px;
+      margin: 16px auto;
+      text-align: center;
+    }
 
-        /* ===== CONTROLES ===== */
-        .controls {
-            padding: 12px 20px;
-            max-width: 1100px;
-            margin: 16px auto;
-            text-align: center;
-        }
+    button.primary {
+      background: #1e88e5;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 12px;
+    }
 
-        button.primary {
-            background: #1e88e5;
-            color: #fff;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 12px;
-        }
+    .list {
+      max-width: 1100px;
+      margin: 20px auto;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      padding: 0 1rem;
+    }
 
-        .list {
-            max-width: 1100px;
-            margin: 12px auto;
-            display: grid;
-            gap: 10px;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .card {
-            background: #fff;
-            padding: 12px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-            text-align: left;
-            cursor: pointer;
-        }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
 
-        .small {
-            color: #666;
-            font-size: 0.9rem;
-        }
+    .card img.main {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+    }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: #1e88e5;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.9rem;
-            margin-top: auto;
-        }
-    </style>
+    .card-content {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-loja {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #1e88e5;
+    }
+
+    .textos strong {
+      font-size: 1rem;
+      color: #2c3e50;
+      display: block;
+    }
+
+    .descricao {
+      color: #555;
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .categoria {
+      color: #1e88e5;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .ver-mais {
+      color: #1e88e5;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: #1e88e5;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+  </style>
 </head>
 
 <body>
-
-    <header>
-        <div class="logo">
-            <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Logo">
-            <h1>Comércios da Minha Região</h1>
-        </div>
-
-        <div class="menu-toggle" id="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <nav id="nav">
-            <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Lojas do seu lado</a></li>
-                <li><a href="#">Sobre nós</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div id="map"></div>
-
-    <div class="controls">
-        <button id="btnLocate" class="primary">📍 Usar minha localização</button>
-        <label style="margin-left:12px;">Raio (m):
-            <input type="number" id="radius" value="1000" min="200" step="100"
-                style="width:90px; padding:6px; border-radius:6px; border:1px solid #ccc;">
-        </label>
+  <header>
+    <div class="logo">
+      <img src="IMAGENS/logo.png" alt="Logo Conecta Vizinhos">
+      <h1>Conecta Vizinhos</h1>
     </div>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="nav">
+      <ul>
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Lojas do seu lado</a></li>
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div id="storeList" class="list"></div>
+  <div id="map"></div>
 
-    <footer>
-        © 2025 - Projeto Comunitário Local | Feito com ❤️ para a comunidade
-    </footer>
+  <div class="controls">
+    <button id="btnLocate" class="primary">📍 Usar minha localização</button>
+    <label style="margin-left:12px;">Raio (m):
+      <input type="number" id="radius" value="1000" min="200" step="100"
+        style="width:90px; padding:6px; border-radius:6px; border:1px solid #ccc;">
+    </label>
+  </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <div id="storeList" class="list"></div>
 
-    <script>
-        // ===== MENU MOBILE =====
-        const menuToggle = document.getElementById('menu-toggle');
-        const nav = document.getElementById('nav');
-        menuToggle.addEventListener('click', () => { nav.classList.toggle('open'); menuToggle.classList.toggle('active'); });
-        document.querySelectorAll('nav a').forEach(link => { link.addEventListener('click', () => { nav.classList.remove('open'); menuToggle.classList.remove('active'); }); });
+  <footer>
+    © 2025 - Conecta Vizinhos | Feito com ❤️ para a comunidade
+  </footer>
 
-        // ===== MAPA =====
-        const map = L.map('map').setView([-23.55, -46.63], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  <div id="imageModal" class="modal" onclick="this.classList.remove('active')">
+    <img src="" alt="Imagem ampliada" id="modalImg">
+  </div>
 
-        let userMarker = null;
-        let storeMarkers = [];
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      menuToggle.classList.toggle('active');
+    });
 
-        const btn = document.getElementById('btnLocate');
-        const list = document.getElementById('storeList');
+    const map = L.map('map').setView([-23.55, -46.63], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-        const fakeStores = [
-            { nome: "Padaria do João", endereco: "Rua das Flores, 120", lat: -23.552, lon: -46.634 },
-            { nome: "Mercadinho da Ana", endereco: "Av. Brasil, 45", lat: -23.548, lon: -46.628 },
-            { nome: "Farmácia Popular", endereco: "Rua Central, 99", lat: -23.556, lon: -46.630 },
-            { nome: "Lanchonete Sabor Local", endereco: "Praça das Árvores, 15", lat: -23.550, lon: -46.635 }
-        ];
+    let userMarker = null;
+    let storeMarkers = [];
+    const btn = document.getElementById('btnLocate');
+    const list = document.getElementById('storeList');
 
-        const userIcon = L.icon({ iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png', iconSize: [24, 24], iconAnchor: [12, 24] });
-        const shopIcon = L.icon({ iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png', iconSize: [24, 24], iconAnchor: [12, 24] });
+    const fakeStores = [
+      {
+        nome: "Padaria do João",
+        categoria: "Padaria",
+        descricao: "Pães fresquinhos e bolos caseiros todos os dias.",
+        endereco: "Rua das Flores, 120",
+        lat: -23.552,
+        lon: -46.634,
+        imagem: "https://images.unsplash.com/photo-1587241321921-91e5b7a1a8b9",
+        logo: "https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
+      },
+      {
+        nome: "Mercadinho da Ana",
+        categoria: "Mercado",
+        descricao: "Tudo o que você precisa sem sair do bairro.",
+        endereco: "Av. Brasil, 45",
+        lat: -23.548,
+        lon: -46.628,
+        imagem: "https://images.unsplash.com/photo-1580910051073-dedbdfd3b9f8",
+        logo: "https://cdn-icons-png.flaticon.com/512/2331/2331970.png"
+      },
+      {
+        nome: "Farmácia Popular",
+        categoria: "Farmácia",
+        descricao: "Remédios e cuidados de saúde com atendimento humanizado.",
+        endereco: "Rua Central, 99",
+        lat: -23.556,
+        lon: -46.630,
+        imagem: "https://images.unsplash.com/photo-1587854692152-93dcf38a42c2",
+        logo: "https://cdn-icons-png.flaticon.com/512/2966/2966327.png"
+      },
+      {
+        nome: "Lanchonete Sabor Local",
+        categoria: "Lanchonete",
+        descricao: "Lanches rápidos e deliciosos feitos com carinho.",
+        endereco: "Praça das Árvores, 15",
+        lat: -23.550,
+        lon: -46.635,
+        imagem: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
+        logo: "https://cdn-icons-png.flaticon.com/512/857/857681.png"
+      }
+    ];
 
-        function renderStores(stores, userLat, userLon) {
-            storeMarkers.forEach(m => map.removeLayer(m));
-            storeMarkers = [];
-            list.innerHTML = '';
-            stores.forEach(s => {
-                const marker = L.marker([s.lat, s.lon], { icon: shopIcon }).addTo(map);
-                marker.bindPopup(`<strong>${s.nome}</strong><br>${s.endereco}`);
-                storeMarkers.push(marker);
+    const userIcon = L.icon({ iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png', iconSize: [24, 24], iconAnchor: [12, 24] });
+    const shopIcon = L.icon({ iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png', iconSize: [24, 24], iconAnchor: [12, 24] });
 
-                const card = document.createElement('div'); card.className = 'card';
-                card.innerHTML = `<strong>${s.nome}</strong><div class="small">${s.endereco}</div>`;
-                card.addEventListener('click', () => { map.setView([s.lat, s.lon], 18); marker.openPopup(); });
-                list.appendChild(card);
-            });
-        }
+    function renderStores(stores) {
+      storeMarkers.forEach(m => map.removeLayer(m));
+      storeMarkers = [];
+      list.innerHTML = '';
 
-        function haversineDistance(lat1, lon1, lat2, lon2) { const toRad = x => x * Math.PI / 180; const R = 6371000; const dLat = toRad(lat2 - lat1); const dLon = toRad(lon2 - lon1); const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2; return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); }
+      stores.forEach(s => {
+        const marker = L.marker([s.lat, s.lon], { icon: shopIcon }).addTo(map);
+        marker.bindPopup(`<strong>${s.nome}</strong><br>${s.endereco}`);
+        storeMarkers.push(marker);
 
-        btn.addEventListener('click', () => {
-            if (!navigator.geolocation) { alert("Seu navegador não suporta geolocalização."); return; }
-            btn.textContent = "Localizando...";
-            navigator.geolocation.getCurrentPosition(pos => {
-                const { latitude, longitude } = pos.coords;
-                if (userMarker) map.removeLayer(userMarker);
-                userMarker = L.marker([latitude, longitude], { icon: userIcon }).addTo(map).bindPopup("Você está aqui").openPopup();
-                map.setView([latitude, longitude], 15);
-                renderStores(fakeStores, latitude, longitude);
-                btn.textContent = "📍 Usar minha localização";
-            }, err => { alert("Não foi possível obter sua localização: " + err.message); btn.textContent = "📍 Usar minha localização"; }, { enableHighAccuracy: true });
-        });
-    </script>
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${s.imagem}" alt="${s.nome}" class="main" onclick="openImage('${s.imagem}')">
+          <div class="card-content">
+            <div class="info">
+              <img src="${s.logo}" class="logo-loja" alt="Logo ${s.nome}">
+              <div class="textos">
+                <strong>${s.nome}</strong>
+                <div class="small">${s.endereco}</div>
+              </div>
+            </div>
+            <p class="descricao">${s.descricao}</p>
+            <div class="bottom-row">
+              <div class="categoria">${s.categoria}</div>
+              <a class="ver-mais" href="javascript:void(0)" onclick="openImage('${s.imagem}')">Ver mais</a>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
 
+    function openImage(url) {
+      const modal = document.getElementById('imageModal');
+      const img = document.getElementById('modalImg');
+      img.src = url;
+      modal.classList.add('active');
+    }
+
+    btn.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert("Seu navegador não suporta geolocalização.");
+        return;
+      }
+      btn.textContent = "Localizando...";
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        if (userMarker) map.removeLayer(userMarker);
+        userMarker = L.marker([latitude, longitude], { icon: userIcon }).addTo(map).bindPopup("Você está aqui").openPopup();
+        map.setView([latitude, longitude], 15);
+        renderStores(fakeStores);
+        btn.textContent = "📍 Usar minha localização";
+      }, err => {
+        alert("Não foi possível obter sua localização: " + err.message);
+        btn.textContent = "📍 Usar minha localização";
+      }, { enableHighAccuracy: true });
+    });
+  </script>
 </body>
 
 </html>
